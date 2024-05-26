@@ -7,7 +7,7 @@ class Boton:
     def __init__(self, contenedor) -> None:
         self.contenedor = contenedor
         self.contenedor.title("Button")
-        self.contenedor.geometry("400x200")
+        self.contenedor.geometry("400x300")
         self.contenedorBtn = Frame(self.contenedor)
         self.contenedorBtn.pack()
         self.paths = ["images/retiro.png", "images/depositar.png", "images/transferencia.png", "images/servicios.png"]
@@ -19,9 +19,9 @@ class Boton:
         
         for btn in range(len(self.btns)):
             img = Image.open(self.paths[btn])
-            img = img.resize((20, 20))
+            img = img.resize((30, 30))
             img = ImageTk.PhotoImage(img)
-            boton = ttk.Button(self.contenedorBtn, text =self.btns[btn] , image = img, compound=LEFT, style='Rounded.TButton')
+            boton = ttk.Button(self.contenedorBtn, text =self.btns[btn] , image = img, compound=TOP, style='Rounded.TButton')
             boton.image = img
             boton.grid(row=btn//2, column=btn%2, padx=5, pady=10, ipadx=20, ipady=20)
             

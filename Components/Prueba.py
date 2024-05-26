@@ -17,14 +17,14 @@ class BCPApp(tk.Tk):
         header_frame.pack(fill="x")
        
         logo_image = Image.open("./images/bcp_logo.png")
-        logo_image = logo_image.resize((50, 50), Image.ANTIALIAS)  
+        logo_image = logo_image.resize((50, 50))  
         self.logo_photo = ImageTk.PhotoImage(logo_image)
        
         logo_label = ttk.Label(header_frame, image=self.logo_photo, background="#003399")
         logo_label.pack(side="left", padx=10, pady=10)
 
         decorative_image = Image.open("./images/imagen__decorativa.png")
-        decorative_image = decorative_image.resize((50, 50), Image.ANTIALIAS) 
+        decorative_image = decorative_image.resize((50, 50)) 
         self.decorative_photo = ImageTk.PhotoImage(decorative_image)
 
         decorative_label = ttk.Label(header_frame, image=self.decorative_photo, background="#003399")

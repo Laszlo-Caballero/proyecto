@@ -17,7 +17,7 @@ class BCPApp(tk.Tk):
         header_frame.pack(fill="x")
        
         logo_image = Image.open("./images/bcp_logo.png")
-        logo_image = logo_image.resize((50, 50))  
+        logo_image = logo_image.resize((150, 120))  
         self.logo_photo = ImageTk.PhotoImage(logo_image)
        
         logo_label = ttk.Label(header_frame, image=self.logo_photo, background="#003399")

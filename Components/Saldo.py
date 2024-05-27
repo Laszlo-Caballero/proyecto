@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import font
 from PIL import Image, ImageTk, ImageFont
-# import py_hot_reload
+#import py_hot_reload
 
 class Saldo:
     def __init__(self, contenedor):
@@ -61,14 +61,13 @@ class Saldo:
         self.ConteinerCuenta.pack(pady=(10,0))
 
 # def Main():
-#     root = Tk()
-#     root.geometry("500x200")
-#     root.title("Saldo")
-#     contenedor = Frame(root)
-#     contenedor.config(bg="white")
-#     app = Saldo(contenedor)
-#     contenedor.pack()
-#     root.mainloop()
+#       root = Tk()
+#       root.title("Saldo")
+#       contenedor = Frame(root)
+#       contenedor.config(bg="white")
+#       app = Saldo(contenedor)
+#       contenedor.pack()
+#       root.mainloop()
 # py_hot_reload.run_with_reloader(Main)
 
 

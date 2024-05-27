@@ -1,8 +1,15 @@
 from tkinter import *
+import py_hot_reload
 
-class MainPanel:
-    def __init__(self, ventana):
-        self.ventana = ventana
-        self.ventana.title("Cajero")
-        self.ventana.geometry("500x500")
-        self.ventana.config(bg="White")
+class MainPanel(Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Cajero")
+        self.geometry("700x500")
+        self.config(bg="white")
+
+
+def Main():
+    app = MainPanel()
+    app.mainloop()
+py_hot_reload.run_with_reloader(Main)

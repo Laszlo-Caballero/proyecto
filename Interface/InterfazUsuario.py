@@ -2,12 +2,12 @@ from tkinter import *
 from Components.Header import Header
 from Components.Saldo import Saldo
 from Components.Boton import Boton
-import py_hot_reload
+# import py_hot_reload
 
-class Cuenta(Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Cajero")
+class Cuenta(Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.title("Cuenta Usuario")
         self.geometry("900x500")
         self.config(bg="white")
         self.header = Header(self, width=500)
@@ -20,7 +20,3 @@ class Cuenta(Tk):
         self.FrameMain.pack(fill='x', pady=(20,0))
 
 
-def Main():
-    app = Cuenta()
-    app.mainloop()
-py_hot_reload.run_with_reloader(Main)

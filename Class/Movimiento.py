@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Movimiento:
     def __init__(self, CuentaOrigen, CuentaDestino, Dinero, Tipo):
         self.CuentaOrigen = CuentaOrigen

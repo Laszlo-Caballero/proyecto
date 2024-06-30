@@ -1,7 +1,7 @@
 import pickle
-from Movimiento import Movimiento
-from Usuario import Usuario
-from Billete import Billete
+from .Movimiento import Movimiento
+from .Usuario import Usuario
+from .Billete import Billete
 
 
 class Cajero:
@@ -82,17 +82,17 @@ class Cajero:
               
 
 
-with open('Data/Cajero.pkl', 'rb') as file:
-     cajero: Cajero = pickle.load(file) 
+# with open('Data/Cajero.pkl', 'rb') as file:
+#      cajero: Cajero = pickle.load(file) 
 
 
 
-# billetes :list[Billete] = cajero.SacarDinero(1100)
+# # billetes :list[Billete] = cajero.SacarDinero(1100)
 
-# cajero.Guardar()
+# # cajero.Guardar()
 
-# for billete in billetes:
-#     print(f"Billete: {billete.Valor} Cantidad: {billete.Cantidad}")
+# # for billete in billetes:
+# #     print(f"Billete: {billete.Valor} Cantidad: {billete.Cantidad}")
 
-for i in range(0, len(cajero.Billetes) -1):
-    print(f"{cajero.Billetes[i].Valor=}  {cajero.Billetes[i].Cantidad=}")
+# for i in range(0, len(cajero.Billetes) -1):
+#     print(f"{cajero.Billetes[i].Valor=}  {cajero.Billetes[i].Cantidad=}")

@@ -1,4 +1,4 @@
-from Movimiento import Movimiento
+from .Movimiento import Movimiento
 
 class Usuario:
     def __init__(self, nombre, numeroCuenta, Dinero, Movimientos: list[Movimiento]= [], contraseña = ""):

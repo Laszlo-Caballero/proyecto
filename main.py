@@ -1,8 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+from Class.Cajero import Cajero
+import pickle
 import py_hot_reload
-from Interface.InterfazAñadir import InterfaUsuario
+from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazActualizarDepostio import InterfazActualizar
 
@@ -37,7 +39,7 @@ class MainPanel(Tk):
         
 
     def AbrirVentanaAgregar(self):
-        InterfaUsuario(self)
+        InterfazAñadir(self)
 
     def AbrirVentanaActualizar(self):
         InterfazActualizar(self)
@@ -48,4 +50,9 @@ class MainPanel(Tk):
 def Main():
     app = MainPanel()
     app.mainloop()
+
+
+
+
 py_hot_reload.run_with_reloader(Main)
+

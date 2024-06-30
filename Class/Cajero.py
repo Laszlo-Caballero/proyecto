@@ -74,6 +74,8 @@ class Cajero:
     def Guardar(self):
         with open('Data/Cajero.pkl', 'wb') as file:
             pickle.dump(self, file)
+        with open('Data/Usuario.pkl', 'wb') as file:
+            pickle.dump(self.datos_cargados, file)
 
     def AñadirDinero(self, Cantidad, Billetes: list[Billete]):
         self.DineroCajero += Cantidad

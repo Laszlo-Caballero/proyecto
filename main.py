@@ -1,8 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
-from Class.Cajero import Cajero
-import pickle
 import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta

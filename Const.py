@@ -21,10 +21,10 @@ Datos = [
 
 
 Cajeros = [
-    Cajero(1100, "Plaza Norte"),
-    Cajero(1100, "Mall Plaza"),
-    Cajero(1100, "Bcp"),
-    Cajero(1100, "Tottus")
+    Cajero("Plaza Norte"),
+    Cajero("Mall Plaza"),
+    Cajero("Bcp"),
+    Cajero("Tottus")
 ]
 
 with open('Data/Usuario.pkl', 'wb') as file:

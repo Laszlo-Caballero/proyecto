@@ -1,37 +1,47 @@
-from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, ttk, END
+from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, ttk, END, messagebox
 import pickle
 from Class.Cajero import Cajero
 from Class.Billete import Billete
 
-class InterfazActualizar(Toplevel):
-    def __init__(self, parent):
+class InterfazActualizarDepostio(Toplevel):
+    def __init__(self, parent, cajero):
         super().__init__(parent)
         self.title("Actulizar Depostio")
         self.geometry("500x200")
-        self.lbl = Label(self, text="Actualizar Deposito")
-        self.lbl.pack()
+
+        self.IdxCajero = cajero
+        self.IdxBilelte = -1
         with open('Data/Cajero.pkl', 'rb') as file:
-            self.Cajero : list[Cajero] = pickle.load(file)
+            self.LstCajero : list[Cajero] = pickle.load(file)
+        self.Cajero = self.LstCajero[self.IdxCajero]
         
+
+        self.lbl = Label(self, text=f"Actualizar Deposito de la sucursal {self.Cajero.Sucursal}")
+        self.lbl.pack()
+
         self.FramePrincipal = Frame(self)
-        
-        self.FrameDinero = Frame(self.FramePrincipal)
         
         self.txtVDinero = StringVar()
         self.txtVDinero.set(f"Dinero Del cajero: {self.Cajero.DineroCajero}") 
         
-        self.lblDinero = Label(self.FrameDinero, textvariable=self.txtVDinero)
+        self.lblDinero = Label(self, textvariable=self.txtVDinero)
         self.lblDinero.pack()
-    
-        self.lbl1 = Label(self.FrameDinero, text="Cantidad a Añadir")
-        self.lbl1.pack(pady=(10,0))
-        
-        self.txtDinero = Entry(self.FrameDinero)
-        self.txtDinero.pack(pady=(0, 10))
-        
-        self.btnAñadir = Button(self.FrameDinero, text="Añadir Dinero")
-        self.btnAñadir.pack()
-        self.FrameDinero.pack(side='left', padx=(0,100))
+
+        self.FrameEstado = Frame(self.FramePrincipal)
+
+        self.txtEstadoActual = StringVar()
+        self.txtEstadoActual.set(f"El Estado Actual es: {self.Cajero.Estado}")
+        self.lblEstado = Label(self.FrameEstado, textvariable=self.txtEstadoActual)
+        self.lblEstado.pack()
+
+        self.txtcmbEstado = StringVar()
+        self.cmbEstado = ttk.Combobox(self.FrameEstado, textvariable=self.txtcmbEstado, state='readonly')
+        self.cmbEstado['values'] = ("A", "M", "N")
+        self.cmbEstado.bind("<<ComboboxSelected>>", self.on_change_comboBoxEstado)
+        self.cmbEstado.pack()
+
+
+        self.FrameEstado.pack(side='left')
 
         self.FrameBilletes = Frame(self.FramePrincipal)
 
@@ -56,7 +66,7 @@ class InterfazActualizar(Toplevel):
         self.btnAñadirBileltes = Button(self.FrameBilletes, text="Añadir Billetes", command=self.AñadirBillete)
         self.btnAñadirBileltes.pack(pady=(10,0))
 
-        self.FrameBilletes.pack(side='right')
+        self.FrameBilletes.pack(side='right', anchor="w")
 
         self.FramePrincipal.pack(expand=True)
     
@@ -67,17 +77,26 @@ class InterfazActualizar(Toplevel):
             if self.Cajero.Billetes[i].Valor == billete:
                 self.txtvariable.set(f"Cantidad de billetes: {self.Cajero.Billetes[i].Cantidad}")
                 print(self.Cajero.Billetes[i].Cantidad)
+                self.IdxBilelte = i
                 break
+    
+    def on_change_comboBoxEstado(self, event):
+         estado = self.cmbEstado.get()
+         self.txtcmbEstado.set(estado)
+         self.Cajero.Estado = estado
+         self.txtEstadoActual.set(f"El Estado Actual es: {self.Cajero.Estado}")
+         Cajero.Guardar(self.LstCajero)
+         
+
 
     def AñadirBillete(self):
-        billete = int(self.txtComboBox.get())
-        for i in range(len(self.Cajero[i].Billetes)):
-            if self.Cajero[i].Billetes[i].Valor == billete:
-                self.Cajero[i].Billetes[i].Cantidad += int(self.txtCantidad.get())
-                self.txtvariable.set(f"Cantidad de billetes: {self.Cajero.Billetes[i].Cantidad}")
-                self.txtCantidad.delete(0, END)
-                break
-        Cajero.Guardar(self.Cajero)
+        if self.IdxBilelte != -1:
+                billete = int(self.txtComboBox.get())
+                cantidad = int(self.txtCantidad.get())
+                self.Cajero.AñadirDinero(Billete(billete, cantidad))
+                self.txtVDinero.set(f"Dinero Del cajero: {self.Cajero.DineroCajero}")
+                self.txtvariable.set(f"Cantidad de billetes: {self.Cajero.Billetes[self.IdxBilelte].Cantidad}") 
+                Cajero.Guardar(self.LstCajero)
+        else:
+             messagebox.showerror("Error", "Elija Un billete a insertar")
 
-    def AñadirDinero(self):
-        pass

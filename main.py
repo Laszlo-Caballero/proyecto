@@ -46,12 +46,6 @@ class MainPanel(Tk):
         self.BtnAñadir = ttk.Button(self.btnFrame, text ="Añadir Usuario" , image = self.ImgAñadir, compound=TOP, style='Rounded.TButton', command=self.AbrirVentanaAgregar)
         self.BtnAñadir.image = self.ImgAñadir
         self.BtnAñadir.pack(side='left')
-<<<<<<< HEAD
-
-        
-        self.FrameMid = Frame(self.btnFrame, bg='white')
-=======
->>>>>>> 61763c724cfeda6fca6fa391f663b9dcf5c37054
 
 
 
@@ -61,10 +55,6 @@ class MainPanel(Tk):
         self.BtnCash.image = self.ImgCash
         self.BtnCash.pack(side='left', padx=50)
 
-<<<<<<< HEAD
-        self.FrameMid.pack(side='left', padx=50)
-=======
->>>>>>> 61763c724cfeda6fca6fa391f663b9dcf5c37054
 
         self.ImgUsuarioOpen = Image.open("images/usuario.png")
         self.ImgUsuario = ImageTk.PhotoImage(self.ImgUsuarioOpen)

@@ -3,7 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from Class.Cajero import Cajero
 import pickle
-import py_hot_reload
+#import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
@@ -93,7 +93,7 @@ def Main():
     app.mainloop()
 
 
-#Main()
+Main()
 
-py_hot_reload.run_with_reloader(Main)
+#py_hot_reload.run_with_reloader(Main)
 

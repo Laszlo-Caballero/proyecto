@@ -5,8 +5,10 @@ from .Billete import Billete
 
 
 class Cajero:
-    def __init__(self, DineroCajero):
+    def __init__(self, DineroCajero, Sucursal):
         self.DineroCajero = DineroCajero
+        self.Sucursal = Sucursal
+        self.Estado = "A"
         self.Billetes = [Billete(200, 100), Billete(100, 100), Billete(50, 100), Billete(20, 100)]
         with open("Data/Usuario.pkl", 'rb') as file:
             self.datos_cargados: list[Usuario] = pickle.load(file)
@@ -71,11 +73,15 @@ class Cajero:
         else:
             print("Error al Encontrar Usuario")
 
-    def Guardar(self):
-        with open('Data/Cajero.pkl', 'wb') as file:
-            pickle.dump(self, file)
+    def GuardarUsuario(self):
         with open('Data/Usuario.pkl', 'wb') as file:
             pickle.dump(self.datos_cargados, file)
+
+
+
+    def Guardar(Cajeros):
+        with open('Data/Cajero.pkl', 'wb') as file:
+            pickle.dump(Cajeros, file)
 
     def AñadirDinero(self, Cantidad, Billetes: list[Billete]):
         self.DineroCajero += Cantidad

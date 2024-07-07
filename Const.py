@@ -1,5 +1,6 @@
 from Class.Movimiento import Movimiento
 from Class.Usuario import Usuario
+from Class.Cajero import Cajero
 import pickle
 
 
@@ -17,6 +18,19 @@ Datos = [
          Movimiento("0", "99101", 20, "Deposito")
     ], "1234")
  ]
+
+
+Cajeros = [
+    Cajero(1100, "Plaza Norte"),
+    Cajero(1100, "Mall Plaza"),
+    Cajero(1100, "Bcp"),
+    Cajero(1100, "Tottus")
+]
+
 with open('Data/Usuario.pkl', 'wb') as file:
     pickle.dump(Datos, file)
+
+
+with open('Data/Cajero.pkl', 'wb') as file:
+    pickle.dump(Cajeros, file)
 

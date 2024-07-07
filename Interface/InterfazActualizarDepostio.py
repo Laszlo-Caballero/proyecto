@@ -11,7 +11,7 @@ class InterfazActualizar(Toplevel):
         self.lbl = Label(self, text="Actualizar Deposito")
         self.lbl.pack()
         with open('Data/Cajero.pkl', 'rb') as file:
-            self.Cajero : Cajero = pickle.load(file)
+            self.Cajero : list[Cajero] = pickle.load(file)
         
         self.FramePrincipal = Frame(self)
         
@@ -71,12 +71,13 @@ class InterfazActualizar(Toplevel):
 
     def AñadirBillete(self):
         billete = int(self.txtComboBox.get())
-        for i in range(len(self.Cajero.Billetes)):
-            if self.Cajero.Billetes[i].Valor == billete:
-                self.Cajero.Billetes[i].Cantidad += int(self.txtCantidad.get())
+        for i in range(len(self.Cajero[i].Billetes)):
+            if self.Cajero[i].Billetes[i].Valor == billete:
+                self.Cajero[i].Billetes[i].Cantidad += int(self.txtCantidad.get())
                 self.txtvariable.set(f"Cantidad de billetes: {self.Cajero.Billetes[i].Cantidad}")
                 self.txtCantidad.delete(0, END)
                 break
-        self.Cajero.Guardar()
+        Cajero.Guardar(self.Cajero)
+
     def AñadirDinero(self):
         pass

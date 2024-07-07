@@ -2,6 +2,7 @@ from tkinter import *
 from Components.Header import Header
 from Components.Saldo import Saldo
 from Components.Boton import Boton
+from Components.Prueba import Prueba
 # import py_hot_reload
 
 class Cuenta(Toplevel):
@@ -18,5 +19,12 @@ class Cuenta(Toplevel):
         self.botones = Boton(self.FrameMain)
         self.botones.pack(side="left", padx=(20,0))
         self.FrameMain.pack(fill='x', pady=(20,0))
+        self.prueba = Prueba(self.FrameMain, text="Botón", image_path="images/retiro.png")
+        self.prueba.pack(side='left', padx=(20, 0))
+                
+
+
+        
+
 
 

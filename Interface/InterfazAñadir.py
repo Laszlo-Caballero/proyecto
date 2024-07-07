@@ -35,6 +35,7 @@ class InterfazAñadir(Toplevel):
         self.btnAñadir.pack()
 
 
+
         # Crear Tabla
         self.Tabla = ttk.Treeview(self.FramePrincipal, columns=("col1", "col2", "col3", "col4"), show='headings')
         headers = ["Nombre Cliente", "Numero de Cuenta", "Cantidad de dinero", "Moviminetos"]
@@ -84,4 +85,6 @@ class InterfazAñadir(Toplevel):
             self.Tabla.delete(item)
         for usuario in self.datos_cargados:
             self.Tabla.insert("", "end", values=(usuario.nombre, usuario.numeroCuenta, usuario.dinero, "Ver Movimientos"))
+            
+        
         

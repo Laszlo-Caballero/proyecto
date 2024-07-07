@@ -3,11 +3,10 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from Class.Cajero import Cajero
 import pickle
-import py_hot_reload
+# import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazActualizarDepostio import InterfazActualizar
-
 
 class MainPanel(Tk):
     def __init__(self):
@@ -29,6 +28,7 @@ class MainPanel(Tk):
         self.BtnAñadir = ttk.Button(self.btnFrame, text ="Añadir Usuario" , image = self.ImgAñadir, compound=TOP, style='Rounded.TButton', command=self.AbrirVentanaAgregar)
         self.BtnAñadir.image = self.ImgAñadir
         self.BtnAñadir.pack(side='left')
+
         
         self.FrameMid = Frame(self.btnFrame, bg='white')
 
@@ -51,8 +51,6 @@ class MainPanel(Tk):
         self.BtnCash.image = self.ImgCash
         self.BtnCash.pack(pady=(20,0))
 
-        
-
         self.FrameMid.pack(side='left', padx=50)
 
         self.ImgUsuarioOpen = Image.open("images/usuario.png")
@@ -71,7 +69,7 @@ class MainPanel(Tk):
         InterfazActualizar(self)
 
     def AbrirVentanaUsuario(self):
-         Cuenta(self)
+        Cuenta(self)
 
     def on_Change_ComboBox(self, event):
         select = self.txtVariableOpc.get()
@@ -86,7 +84,7 @@ def Main():
     app.mainloop()
 
 
+Main()
 
-
-py_hot_reload.run_with_reloader(Main)
+# py_hot_reload.run_with_reloader(Main)
 

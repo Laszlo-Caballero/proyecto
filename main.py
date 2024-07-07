@@ -6,6 +6,7 @@ import pickle
 # import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
+from Interface.InterfazLogin import Login
 from Interface.InterfazActualizarDepostio import InterfazActualizarDepostio
 from Interface.InterfazAñadirCajero import AñadirCajero
 from Components.Boton import Boton
@@ -50,11 +51,13 @@ class MainPanel(Tk):
         self.BtnCash = Boton(self.btnFrame, text ="Actualizar Dispensador" , image_path= "images/cash-report.png", command=self.AbrirVentanaActualizar)
         self.BtnCash.pack(side='left', padx=50)
 
-        self.BtnUsuario = Boton(self.btnFrame, text="Interfaz Usuario", image_path="images/usuario.png", command=self.AbrirVentanaUsuario )
+        self.BtnUsuario = Boton(self.btnFrame, text="Interfaz Usuario", image_path="images/usuario.png", command=self.AbrirVentanaLogin)
         self.BtnUsuario.pack(side='right')
         
         
-
+    def AbrirVentanaLogin(self):
+        Login(self)
+        
     def AbrirVentanaAgregar(self):
         InterfazAñadir(self)
 

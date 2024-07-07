@@ -8,6 +8,7 @@ from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazActualizarDepostio import InterfazActualizarDepostio
 from Interface.InterfazAñadirCajero import AñadirCajero
+from Components.Boton import Boton
 
 class MainPanel(Tk):
     def __init__(self):
@@ -41,25 +42,15 @@ class MainPanel(Tk):
         self.btnFrame = Frame(self.FramePrincipal, bg='white')
         self.btnFrame.pack()
 
-        self.ImgAñadirOpen = Image.open("images/agregar-usuario.png") 
-        self.ImgAñadir = ImageTk.PhotoImage(self.ImgAñadirOpen)
-        self.BtnAñadir = ttk.Button(self.btnFrame, text ="Añadir Usuario" , image = self.ImgAñadir, compound=TOP, style='Rounded.TButton', command=self.AbrirVentanaAgregar)
-        self.BtnAñadir.image = self.ImgAñadir
+
+
+        self.BtnAñadir = Boton(self.btnFrame, text ="Añadir Usuario" , image_path= "images/agregar-usuario.png", command=self.AbrirVentanaAgregar)
         self.BtnAñadir.pack(side='left')
 
-
-
-        self.ImgCashOpen = Image.open("images/cash-report.png")
-        self.ImgCash = ImageTk.PhotoImage(self.ImgCashOpen)
-        self.BtnCash = ttk.Button(self.btnFrame, text ="Actualizar Dispensador" , image = self.ImgCash, compound=TOP, style='Rounded.TButton', command=self.AbrirVentanaActualizar)
-        self.BtnCash.image = self.ImgCash
+        self.BtnCash = Boton(self.btnFrame, text ="Actualizar Dispensador" , image_path= "images/cash-report.png", command=self.AbrirVentanaActualizar)
         self.BtnCash.pack(side='left', padx=50)
 
-
-        self.ImgUsuarioOpen = Image.open("images/usuario.png")
-        self.ImgUsuario = ImageTk.PhotoImage(self.ImgUsuarioOpen)
-        self.BtnUsuario = ttk.Button(self.btnFrame, text="Interfaz Usuario", image= self.ImgUsuario, compound= TOP, style='Rounded.TButton', command=self.AbrirVentanaUsuario)
-        self.BtnUsuario.image = self.ImgUsuario
+        self.BtnUsuario = Boton(self.btnFrame, text="Interfaz Usuario", image_path="images/usuario.png", command=self.AbrirVentanaUsuario )
         self.BtnUsuario.pack(side='right')
         
         

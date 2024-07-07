@@ -2,7 +2,7 @@ from tkinter import ttk, TOP
 from PIL import Image, ImageTk
 
 class Boton(ttk.Button):
-    def __init__(self, parent, text, image_path, command):
+    def __init__(self, parent, text, image_path, command=None):
         self.text = text
         self.image_path = image_path
         

@@ -6,8 +6,10 @@ from Components.Boton import Boton
 # import py_hot_reload
 
 class Cuenta(Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent, idxCajero, Nombre):
         super().__init__(parent)
+        self.idxCajero = idxCajero
+        self.NombreSucursal = Nombre
         self.title("Cuenta Usuario")
         self.geometry("900x500")
         self.config(bg="white")

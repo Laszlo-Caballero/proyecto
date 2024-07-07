@@ -11,14 +11,25 @@ class Botones(Frame):
         self.LoadCustomDemi = ImageFont.truetype("./font/Flexo-Demi-webfont.ttf", size=12)
         self.paths = ["images/retiro.png", "images/depositar.png", "images/transferencia.png", "images/servicios.png"]
         self.btns = ["Retiro", "Depósitos", "Transferencia", "Servicios"]
+        self.Command = [self.Retirar, self.Deposito, self.Transferencia, self.Servicios]
         self.font=('Arial', 12)
+
         self.configure(background="white")
         style = ttk.Style()
         style.configure('Rounded.TButton', borderwidth=0, relief="flat", bordercolor="#000000", font=self.font)
         
         for btn in range(len(self.btns)):
-            boton = Boton(self, self.btns[btn], self.paths[btn])
+            boton = Boton(self, self.btns[btn], self.paths[btn], command=self.Command[btn])
             boton.grid(row=btn//2, column=btn%2, padx=5, pady=10, ipadx=20, ipady=20)
-            
+        
+
+    def Retirar(self):
+        print("Retirar")
+    def Deposito(self):
+        print("Deposito")
+    def Transferencia(self):
+        print("Transferencia")
+    def Servicios(self):
+        print("Pagar Servicios")
 
 

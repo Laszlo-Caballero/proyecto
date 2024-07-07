@@ -3,7 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from Class.Cajero import Cajero
 import pickle
-# import py_hot_reload
+import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazActualizarDepostio import InterfazActualizarDepostio
@@ -16,7 +16,6 @@ class MainPanel(Tk):
         self.title("Cajero")
         self.geometry("900x500")
         self.config(bg="white")
-        
         self.selecCajero = -1
 
         with open('Data/Cajero.pkl', 'rb') as file:
@@ -65,7 +64,7 @@ class MainPanel(Tk):
             messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
     
     def AbrirVentanaUsuario(self):
-        Cuenta(self)
+        Cuenta(self, self.selecCajero, self.Cajeros[self.selecCajero].Sucursal)
 
     def on_Change_ComboBox(self, event):
         select = self.txtVariableOpc.get()
@@ -91,7 +90,7 @@ def Main():
     app.mainloop()
 
 
-Main()
+#Main()
 
-# py_hot_reload.run_with_reloader(Main)
+py_hot_reload.run_with_reloader(Main)
 

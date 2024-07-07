@@ -4,14 +4,14 @@ from tkinter import ttk
 from .Boton import Boton
 
 class Botones(Frame):
-    def __init__(self, root) -> None:
+    def __init__(self, root, Command) -> None:
         super().__init__(root)
+        self.Command = Command
         self.LoadCustomRegular = ImageFont.truetype("./font/Flexo-Regular-webfont.ttf", size=12)
         self.LoadCustomBold = ImageFont.truetype("./font/Flexo-Bold-webfont.ttf", size=12)
         self.LoadCustomDemi = ImageFont.truetype("./font/Flexo-Demi-webfont.ttf", size=12)
         self.paths = ["images/retiro.png", "images/depositar.png", "images/transferencia.png", "images/servicios.png"]
         self.btns = ["Retiro", "Depósitos", "Transferencia", "Servicios"]
-        self.Command = [self.Retirar, self.Deposito, self.Transferencia, self.Servicios]
         self.font=('Arial', 12)
 
         self.configure(background="white")
@@ -23,13 +23,5 @@ class Botones(Frame):
             boton.grid(row=btn//2, column=btn%2, padx=5, pady=10, ipadx=20, ipady=20)
         
 
-    def Retirar(self):
-        print("Retirar")
-    def Deposito(self):
-        print("Deposito")
-    def Transferencia(self):
-        print("Transferencia")
-    def Servicios(self):
-        print("Pagar Servicios")
 
 

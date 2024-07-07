@@ -27,52 +27,6 @@ class Cajero:
         self.Guardar()
         return CantBilletes
 
-    def Depositar(self, CantidadDinero, CuentaDest):
-        Encontrado = False
-        Usuario = -1
-        for i in range(0, len(self.datos_cargados)-1):
-            if(CuentaDest == self.datos_cargados[i].numeroCuenta):
-                Encontrado = True
-                Usuario = i
-                break
-        if(Encontrado):
-            print(f"Usuario = {self.datos_cargados[Usuario].nombre}")
-            self.datos_cargados[Usuario].dinero += CantidadDinero
-            NuevoMovimineto = Movimiento("Cajero", CuentaDest, CantidadDinero, "Deposito")
-            self.datos_cargados[Usuario].movimientos.append(NuevoMovimineto)
-            with open('Data/Usuario.pkl', 'wb') as file:
-                pickle.dump(self.datos_cargados, file)
-        else:
-            print("Error al Encontrar Usuario")
-    
-    def Transferir(self, CantidadDinero, CuentaOrigen, CuentaDest):
-        Origen = -1
-        Dest = -1
-        for i in range(0, len(self.datos_cargados)-1):
-            if(CuentaOrigen == self.datos_cargados[i].numeroCuenta):
-                Origen = i
-                break
-        if(Origen != -1 and self.datos_cargados[Origen].dinero >= CantidadDinero):
-            for i in range(0, len(self.datos_cargados)-1):
-                if(CuentaDest == self.datos_cargados[i].numeroCuenta):
-                    Dest = i
-                    break
-            if(Dest != -1):
-                NuevoMomiento = Movimiento(CuentaOrigen, CuentaDest, CantidadDinero, "Transferencia")
-                if self.datos_cargados[Origen].dinero >= CantidadDinero:
-                    self.datos_cargados[Origen].dinero -= CantidadDinero
-                    self.datos_cargados[Origen].movimientos.append(NuevoMomiento)
-                    self.datos_cargados[Dest].dinero += CantidadDinero
-                    self.datos_cargados[Dest].movimientos.append(NuevoMomiento)
-                    with open('Usuario.pkl', 'wb') as file:
-                        pickle.dump(self.datos_cargados, file)
-                else:
-                    print("Error Al hacer el deposito")
-            else:
-                print("Error al encontrar El Destino")
-        else:
-            print("Error al Encontrar Usuario")
-
     def GuardarUsuario(self):
         with open('Data/Usuario.pkl', 'wb') as file:
             pickle.dump(self.datos_cargados, file)

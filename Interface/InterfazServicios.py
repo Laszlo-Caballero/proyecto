@@ -7,12 +7,10 @@ class InterfazServicios(Toplevel):
         self.title("Servicios")
         self.geometry("500x350")
 
-        # Configuración de colores
         azul_oscuro = "#1D4E8F"
         azul_claro = "#4182C4"
         naranja = "#F28C28"
 
-        # Título
         self.lbl = Label(self, text="Servicios", font=("Arial", 14), fg=azul_oscuro)
         self.lbl.pack(pady=10, anchor="w")
 
@@ -30,10 +28,9 @@ class InterfazServicios(Toplevel):
         self.servicio_var = StringVar()
         self.cmbServicio = ttk.Combobox(self.FrameServicio, textvariable=self.servicio_var, state='readonly')
         self.cmbServicio['values'] = ["Agua", "Luz"]
-        self.cmbServicio.current(0)  # Valor predeterminado
+        self.cmbServicio.current(0)  
         self.cmbServicio.pack(side='left', padx=10)
 
-        # Frame del código de pago
         self.FrameCodigo = Frame(self.FramePrincipal)
         self.FrameCodigo.pack(pady=10)
 

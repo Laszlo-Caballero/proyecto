@@ -15,3 +15,5 @@ def cargar():
 
     with open('Data/Cajero.pkl', 'wb') as file:
         pickle.dump(Cajeros, file)
+
+#🐀

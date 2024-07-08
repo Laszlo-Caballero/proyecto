@@ -81,3 +81,17 @@ class Cajero:
             Usuario.movimientos.append(Movimiento("0", Usuario.numeroCuenta, auxcantidad, "Retiro"))
 
         return error, listaBilletes
+
+    def Transferencia(cantidad: int, Usuario: Usuario, receptor: Usuario):
+        error = ""
+        if cantidad <= Usuario.dinero:
+           Usuario.dinero -= cantidad
+           receptor.dinero += cantidad
+        else:
+            error = "No tiene el dinero suficiente"     
+
+        if error == "":
+            Usuario.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, "Transferencia"))
+            receptor.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, "Transferencia"))
+
+        return error

@@ -8,6 +8,7 @@ from Class.Usuario import Usuario
 from Class.Cajero import Cajero
 from Components.FMovimiento import FMovimiento
 from .InterfazMovimientos import InterfazMovmientos
+from .InterfazTranferencia import InterfazTransferencia
 import pickle
 # import py_hot_reload
 
@@ -73,10 +74,13 @@ class Cuenta(Toplevel):
         print("Deposito")
     def Transferencia(self):
         print("Transferencia")
+        top = InterfazTransferencia(self, self.Usuario)
+        top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
+
     def Servicios(self):
         print("Pagar Servicios")
     def VerMovimientos(self):
-         InterfazMovmientos(self, self.Usuario.movimientos, self.Usuario.nombre)
+         InterfazMovmientos(self, self.Usuarios[self.idxUsuario].movimientos, self.Usuarios[self.idxUsuario].nombre)
 
         
 

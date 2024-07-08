@@ -52,12 +52,18 @@ class Saldo(Frame):
 
         ##Dinero
         self.ConteinerDinero = Frame(self.ConteinerCuenta, bg="white")
-        self.lblDinero = Label(self.ConteinerDinero, text=self.Saldo, bg="white", font=self.FontBold)
+        self.txtSaldo = StringVar()
+        self.txtSaldo.set(str(self.Saldo))
+        self.lblDinero = Label(self.ConteinerDinero, textvariable=self.txtSaldo, bg="white", font=self.FontBold)
         self.lblDinero.pack()
         self.lblTxt = Label(self.ConteinerDinero, text="Saldo Disponible", bg="white", font=self.FontDisponbleRegular)
         self.lblTxt.pack()
         self.ConteinerDinero.grid(row=1, column=2)
         self.ConteinerCuenta.pack(pady=(10,0))
+
+    
+    def Actualizar(self, saldo):
+        self.txtSaldo.set(str(saldo))
 
 
 

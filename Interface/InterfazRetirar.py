@@ -1,4 +1,4 @@
-from tkinter import Toplevel, Frame, ttk, Label, Button, StringVar, LEFT, CENTER
+from tkinter import Toplevel, Frame, ttk, Label, Button, StringVar, LEFT, CENTER, messagebox
 from PIL import Image, ImageTk
 import pickle
 from Class.Usuario import Usuario
@@ -137,8 +137,12 @@ class Retirar(Toplevel):
         print(dinero)
         if dinero != "0":
             error, lista = self.Cajeros[self.selecCajero].RetirarDinero(int(dinero), self.Usuarios[self.IdxUsuario])
-            Cajero.Guardar(self.Cajeros)
-            Usuario.Guardar(self.Usuarios)
-            
+            if error == "":
+                Cajero.Guardar(self.Cajeros)
+                Usuario.Guardar(self.Usuarios)
+                messagebox.showinfo("Exito", "Se completo el retiro")
+            else:
+                messagebox.showerror("Error", error)
+
             for billete in lista:
                 print(f"{billete.Valor=} {billete.Cantidad}")

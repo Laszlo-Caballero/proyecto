@@ -15,3 +15,5 @@ def Cargar():
 
     with open(r'Data/Cajero.pkl', 'wb') as file:
         pickle.dump(Cajeros, file)
+
+

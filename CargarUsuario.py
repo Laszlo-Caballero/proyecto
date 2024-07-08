@@ -19,7 +19,11 @@ Datos = [
  ]
 
 
+<<<<<<< HEAD
 with open(r'Data\Usuario.pkl', 'wb') as file:
+=======
+with open(r'Data/Usuario.pkl', 'wb') as file:
+>>>>>>> 7ee6b8b32d60786d01da08d29774910a3186762c
     pickle.dump(Datos, file)
 
 

@@ -14,6 +14,22 @@ class Retirar(Toplevel):
         self.geometry("900x500")
         self.Usuario = usuario
         self.Cajero = cajero
+        with open(r'Data/Cajero.pkl', 'rb') as file:
+            self.Cajeros : list[Cajero] = pickle.load(file)
+        with open("Data/Usuario.pkl", 'rb') as file:
+            self.Usuarios: list[Usuario] = pickle.load(file) 
+        
+        self.IdxUsuario = -1
+        self.selecCajero = -1
+
+        for i in range(len(self.Cajeros)):
+            if self.Cajeros[i].Sucursal == self.Cajero.Sucursal:
+                self.selecCajero = i
+                break
+        for i in range(len(self.Usuarios)):
+            if self.Usuarios[i].numeroCuenta == self.Usuario.numeroCuenta:
+                self.IdxUsuario = i
+
 
         self.FrameHeader = Frame(self, width=900, height=70)
         
@@ -120,8 +136,9 @@ class Retirar(Toplevel):
         dinero = self.txtMonto.get()
         print(dinero)
         if dinero != "0":
-            lista : list[Billete] = self.Cajero.RetirarDinero(int(dinero), self.Usuario)
-            print(lista)
+            error, lista = self.Cajeros[self.selecCajero].RetirarDinero(int(dinero), self.Usuarios[self.IdxUsuario])
+            Cajero.Guardar(self.Cajeros)
+            Usuario.Guardar(self.Usuarios)
             
             for billete in lista:
                 print(f"{billete.Valor=} {billete.Cantidad}")

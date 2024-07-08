@@ -13,20 +13,6 @@ class Cajero:
             self.datos_cargados: list[Usuario] = pickle.load(file)
         self.DineroCajero = self.CargarDinero()
 
-    def SacarDinero(self, Dinero):
-        CantBilletes = []
-        if(self.DineroCajero >= Dinero):
-            for i in range(0, len(self.Billetes)-1):
-                division = Dinero // self.Billetes[i].Valor
-                if division >= 1:
-                    CantBilletes.append(Billete(self.Billetes[i].Valor, division))
-                    self.Billetes[i].Cantidad -= division
-                Dinero = Dinero % self.Billetes[i].Valor
-
-        self.DineroCajero -= Dinero
-        self.Guardar()
-        return CantBilletes
-
     def GuardarUsuario(self):
         with open('Data/Usuario.pkl', 'wb') as file:
             pickle.dump(self.datos_cargados, file)
@@ -50,22 +36,33 @@ class Cajero:
     
     def RetirarDinero(self, cantidad, Usuario: Usuario):
         listaBilletes = []
+        auxcantidad = cantidad
+        error = ""
         if(cantidad <= Usuario.dinero):
-            for billete in self.Billetes:
-                print(billete.Cantidad)
-                if billete.Cantidad > 0:
-                    dinerototal = billete.Cantidad * billete.Valor
+            for i in range(len(self.Billetes)):
+                print(self.Billetes[i].Cantidad)
+                if self.Billetes[i].Cantidad > 0:
+                    dinerototal = self.Billetes[i].Cantidad * self.Billetes[i].Valor
                     if dinerototal > cantidad:
-                        dinero = cantidad // billete.Valor
+                        dinero = cantidad // self.Billetes[i].Valor
                         if dinero > 0:
-                            cantidad = cantidad % billete.Valor
-                            listaBilletes.append(Billete(billete.Valor, dinero))
-                            billete.Cantidad -= dinero
+                            cantidad = cantidad % self.Billetes[i].Valor
+                            listaBilletes.append(Billete(self.Billetes[i].Valor, dinero))
+                            self.Billetes[i].Cantidad -= dinero
+                            print("hola")
                     else:
-                        listaBilletes.append(Billete(billete.Valor, billete.Cantidad))
+                        listaBilletes.append(Billete(self.Billetes[i].Valor, self.Billetes[i].Cantidad))
                         cantidad -= dinerototal
-                        billete.Cantidad = 0
-                    
-                elif cantidad == 0:
-                    break 
-        return listaBilletes
+                        self.Billetes[i].Cantidad = 0
+        else:
+            error = "No tiene la cantidad suficiente"
+        
+        
+        Usuario.dinero -= auxcantidad
+        Usuario.movimientos.append(Movimiento("0", Usuario.numeroCuenta, auxcantidad, "Retiro"))
+
+        return error, listaBilletes
+    
+    def mostrar(self):
+        for billete in self.Billetes:
+            print(f"{billete.Cantidad=}, {billete.Valor=}")

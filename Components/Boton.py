@@ -2,7 +2,7 @@ from tkinter import ttk, TOP
 from PIL import Image, ImageTk
 
 class Boton(ttk.Button):
-    def __init__(self, parent, text, image_path= "", command=None, position = TOP):
+    def __init__(self, parent, text, image_path= "", command=None, position = TOP, width = 32, heigth= 32):
         self.text = text
         self.image_path = image_path
         self.position = position
@@ -15,5 +15,6 @@ class Boton(ttk.Button):
         if(image_path != ""):
             image = Image.open(image_path)
             self.photo = ImageTk.PhotoImage(image)
+            image = image.resize((20, 20))
             self.config(image=self.photo)
         

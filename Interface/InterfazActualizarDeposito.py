@@ -8,7 +8,7 @@ class InterfazActualizarDeposito(Toplevel):
     def __init__(self, parent, cajero):
         super().__init__(parent)
         self.title("Actualizar Depósito")
-        self.geometry("500x300")
+        self.geometry("500x400")
 
         self.IdxCajero = cajero
         self.IdxBillete = -1
@@ -41,7 +41,7 @@ class InterfazActualizarDeposito(Toplevel):
 
         self.txtcmbEstado = StringVar()
         self.cmbEstado = ttk.Combobox(self.FrameEstado, textvariable=self.txtcmbEstado, state='readonly', font=("Arial", 12))
-        self.cmbEstado['values'] = ("A", "M", "N")
+        self.cmbEstado['values'] = ("A", "N")
         self.cmbEstado.bind("<<ComboboxSelected>>", self.on_change_comboBoxEstado)
         self.cmbEstado.pack(pady=5)
 

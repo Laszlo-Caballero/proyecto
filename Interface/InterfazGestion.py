@@ -107,6 +107,7 @@ class InterfazGestion(Toplevel):
                     top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
                 elif column == "#8":
                     print("Eliminar")
+                    self.Eliminar(row_index)
     
     def Guardar(self):
         with open(r'Data/Usuario.pkl', 'wb') as file:
@@ -190,6 +191,12 @@ class InterfazGestion(Toplevel):
         self.Guardar()
         self.CargarDatos()
         self.count += len(self.datos_cargados) -1
+   
+    def Eliminar(self, rowindex):
+        self.count += len(self.datos_cargados)
+        self.datos_cargados.pop(rowindex-1)
+        Usuario.Guardar(self.datos_cargados)
+        self.CargarDatos()
     
     def CargarDatos(self):
         for item in self.Tabla.get_children():

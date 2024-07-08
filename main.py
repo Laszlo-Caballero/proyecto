@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 from Class.Cajero import Cajero
 from Class.Usuario import Usuario
 import pickle
-import py_hot_reload
+#import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
@@ -20,10 +20,10 @@ class MainPanel(Tk):
         self.config(bg="white")
         self.selecCajero = -1
 
-        with open('Data/Cajero.pkl', 'rb') as file:
+        with open(r'Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 
 
-        with open("Data/Usuario.pkl", 'rb') as file:
+        with open(r"Data/Usuario.pkl", 'rb') as file:
             self.datos_cargados: list[Usuario] = pickle.load(file)
         
         self.FramePrincipal = Frame(self, bg='white')
@@ -59,8 +59,10 @@ class MainPanel(Tk):
         
         
     def AbrirVentanaLogin(self):
-        #Login(self, self.Cajeros[self.selecCajero])
-        Cuenta(self,self.datos_cargados[1], self.Cajeros[0])
+        if self.selecCajero != -1:
+            Login(self, self.Cajeros[self.selecCajero])
+        else:
+            messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
         
     def AbrirVentanaAgregar(self):
         InterfazAñadir(self)
@@ -98,7 +100,7 @@ def Main():
     app.mainloop()
 
 
-#Main()
+Main()
 
-py_hot_reload.run_with_reloader(Main)
+#py_hot_reload.run_with_reloader(Main)
 

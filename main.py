@@ -104,7 +104,7 @@ def Main():
     app.mainloop()
 
 
-#Main()
+Main()
 
-py_hot_reload.run_with_reloader(Main)
+#py_hot_reload.run_with_reloader(Main)
 

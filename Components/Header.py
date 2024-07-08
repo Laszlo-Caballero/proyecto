@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk, font
 from PIL import Image, ImageTk, ImageFont
-#import py_hot_reload
 
 class Header(Frame):
     def __init__(self, root, Nombre, sede, *args, **kwargs):

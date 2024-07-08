@@ -12,7 +12,6 @@ from .InterfazTranferencia import InterfazTransferencia
 from .InterfazDepositar import InterfazDepositar
 from .InterfazServicios import InterfazServicios
 import pickle
-# import py_hot_reload
 
 class Cuenta(Toplevel):
     def __init__(self, parent, usuario: Usuario, Cajero: Cajero):

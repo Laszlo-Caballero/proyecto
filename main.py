@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 from Class.Cajero import Cajero
 from Class.Usuario import Usuario
 import pickle
-import py_hot_reload
 from Interface.InterfazGestion import InterfazGestion
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
@@ -105,6 +104,4 @@ def Main():
 
 
 Main()
-
-#py_hot_reload.run_with_reloader(Main)
 

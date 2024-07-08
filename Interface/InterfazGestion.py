@@ -75,8 +75,6 @@ class InterfazGestion(Toplevel):
         self.Tabla.bind("<Button-1>", self.VerMovimientos)
         self.Tabla.pack(expand=True, fill='both', side="right")
 
-        self.ContenedorForm.pack(side='left', padx=(0,20))
-        self.FramePrincipal.pack(expand=True)
         
     def VerMovimientos(self, event):
         item = self.Tabla.identify_row(event.y)
@@ -94,18 +92,19 @@ class InterfazGestion(Toplevel):
             pickle.dump(self.datos_cargados, file)
     
     def AñadirUsuario(self):
-        Nombre = self.txtNombre.get()
-        self.txtNombre.delete(0, tk.END)
-        NumeroCuenta = self.txtNroCuenta.get()
-        self.txtNroCuenta.delete(0, tk.END)
-        contraseña = self.txtContraseña.get()
-        self.txtContraseña.delete(0, tk.END)
-        NuevoUsuario = Usuario(Nombre, NumeroCuenta, 0, [], contraseña)
-        print(f"{Nombre=}, {NumeroCuenta=}, {contraseña=}")
-        self.datos_cargados.append(NuevoUsuario)
-        self.Guardar()
-        self.CargarDatos()
-        self.count += len(self.datos_cargados) -1
+        # Nombre = self.txtNombre.get()
+        # self.txtNombre.delete(0, tk.END)
+        # NumeroCuenta = self.txtNroCuenta.get()
+        # self.txtNroCuenta.delete(0, tk.END)
+        # contraseña = self.txtContraseña.get()
+        # self.txtContraseña.delete(0, tk.END)
+        # NuevoUsuario = Usuario(Nombre, NumeroCuenta, 0, [], contraseña)
+        # print(f"{Nombre=}, {NumeroCuenta=}, {contraseña=}")
+        # self.datos_cargados.append(NuevoUsuario)
+        # self.Guardar()
+        # self.CargarDatos()
+        # self.count += len(self.datos_cargados) -1
+        pass
     
     def CargarDatos(self):
         for item in self.Tabla.get_children():

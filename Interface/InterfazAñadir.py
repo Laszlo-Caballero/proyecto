@@ -37,8 +37,8 @@ class InterfazAñadir(Toplevel):
 
 
         # Crear Tabla
-        self.Tabla = ttk.Treeview(self.FramePrincipal, columns=("col1", "col2", "col3", "col4"), show='headings')
-        headers = ["Nombre Cliente", "Numero de Cuenta", "Cantidad de dinero", "Moviminetos"]
+        self.Tabla = ttk.Treeview(self.FramePrincipal, columns=("col1", "col2", "col3", "col4", "col5", "col6"), show='headings')
+        headers = ["Nombre Cliente", "Numero de Cuenta", "Dni", "Contraseña", "Cantidad de dinero", "Moviminetos"]
         for i in range(len(headers)):
             self.Tabla.heading(f"col{i+1}", text=headers[i])
             self.Tabla.column(f"col{i+1}", anchor='center', width=150)
@@ -55,7 +55,7 @@ class InterfazAñadir(Toplevel):
         item = self.Tabla.identify_row(event.y)
         column = self.Tabla.identify_column(event.x)
         if self.Tabla.identify_region(event.x, event.y) == "cell":
-            if column == "#4":
+            if column == "#6":
                 row_index =int(item[1:], 16) - self.count
                 print(row_index)
                 print(len(self.datos_cargados))
@@ -84,7 +84,7 @@ class InterfazAñadir(Toplevel):
         for item in self.Tabla.get_children():
             self.Tabla.delete(item)
         for usuario in self.datos_cargados:
-            self.Tabla.insert("", "end", values=(usuario.nombre, usuario.numeroCuenta, usuario.dinero, "Ver Movimientos"))
+            self.Tabla.insert("", "end", values=(usuario.nombre, usuario.numeroCuenta, usuario.dni, usuario.contraseña, usuario.dinero, "Ver Movimientos"))
             
         
         

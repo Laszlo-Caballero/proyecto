@@ -5,9 +5,9 @@ from tkinter import ttk
 
 
 class Login(Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent, cajero):
         super().__init__(parent)
-        self.title="Inicio de sesión"
+        self.title("Inicio de sesión")
         self.geometry("900x500")
         self.config(bg="white") 
         
@@ -35,12 +35,12 @@ class Login(Toplevel):
         user_label = Label(frame_inicio, text="Numero de la Tarjeta", foreground="#003399",background='white', font=(self.FontDmi,12))
         user_label.place(x=60, y=100)
         
-        entryUser_label = Label(frame_inicio, image = self.image_entry, bd=0)
-        entryUser_label.image = self.image_entry
-        entryUser_label.place(x=110, y=135)
+        self.entryUser_label = Label(frame_inicio, image = self.image_entry, bd=0)
+        self.entryUser_label.image = self.image_entry
+        self.entryUser_label.place(x=110, y=135)
         
-        user_entry =Entry(frame_inicio, width=35, bd=0)
-        user_entry.place(x=120, y=150)
+        self.user_entry =Entry(frame_inicio, width=35, bd=0)
+        self.user_entry.place(x=120, y=150)
         
         pass_label = Label(frame_inicio, text="Contraseña", foreground="#003399",background='white', font=(self.FontDmi,12))
         pass_label.place(x=60, y=200)
@@ -54,11 +54,6 @@ class Login(Toplevel):
         
         btnContinuar = Button(frame_inicio, text="Continuar", fg="white", bg="#F36F2C", borderwidth=0, relief="flat", width=30, font=(self.FontDmi,12))
         btnContinuar.place(x=98, y=300)
-        
-            
-        
-        
 
-        
         
         

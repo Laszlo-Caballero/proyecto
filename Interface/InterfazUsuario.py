@@ -56,7 +56,6 @@ class Cuenta(Toplevel):
                 widget.destroy()
             count = 0
             for mv in range(len(self.Usuarios[self.idxUsuario].movimientos) - 1, -1, -1):
-                print(f"{mv=}  {self.Usuarios[self.idxUsuario].movimientos[mv].Tipo=}")
                 FMovmieto = FMovimiento(self.FrameMovimiento, self.Usuarios[self.idxUsuario].movimientos[mv], self.Usuario.numeroCuenta)
                 FMovmieto.grid(row=count//2, column=count%2, sticky='w')
                 count += 1
@@ -64,22 +63,18 @@ class Cuenta(Toplevel):
                     break
 
     def Retirar(self):
-        print("Retirar")
         top = Retirar(self, self.Usuario, self.Cajero)
         top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
 
     def Deposito(self):
-        print("Deposito")
         top = InterfazDepositar(self, self.Usuario, self.Cajero)
         top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
 
     def Transferencia(self):
-        print("Transferencia")
         top = InterfazTransferencia(self, self.Usuario)
         top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
 
     def Servicios(self):
-        print("Pagar Servicios")
         top = InterfazServicios(self, self.Usuario)
         top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
     
@@ -89,7 +84,6 @@ class Cuenta(Toplevel):
     def on_toplevel_close(self, top: Toplevel):
         top.destroy()
         self.CargarDatos()
-        print(self.Usuarios[self.idxUsuario].dinero)
         self.Saldo.Actualizar(self.Usuarios[self.idxUsuario].dinero)
         self.mostrarMovimientos()
     

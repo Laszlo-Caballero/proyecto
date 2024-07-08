@@ -11,7 +11,6 @@ class FMovimiento(Frame):
         super().__init__(root)
         self.Tipo = movimiento.Tipo[0] ## Transfrencia T, R retiro
         self.Nombre = movimiento.Tipo
-        print(self.Nombre)
         self.Fecha = movimiento.Fecha
         self.Monto = movimiento.Dinero
         self.movimiento = movimiento

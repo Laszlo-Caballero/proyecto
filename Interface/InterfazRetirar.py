@@ -135,7 +135,6 @@ class Retirar(Toplevel):
 
     def Retirar(self):
         dinero = self.txtMonto.get()
-        print(dinero)
         if dinero != "0":
             error, lista = self.Cajeros[self.selecCajero].RetirarDinero(int(dinero), self.Usuarios[self.IdxUsuario])
             if error == "":
@@ -147,6 +146,3 @@ class Retirar(Toplevel):
                 Mensaje(self, tipo='Check', mensaje= CantBilletes)
             else:
                 Mensaje(self, tipo='Error', mensaje= error)
-
-            for billete in lista:
-                print(f"{billete.Valor=} {billete.Cantidad}")

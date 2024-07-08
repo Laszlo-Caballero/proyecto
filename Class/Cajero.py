@@ -36,7 +36,6 @@ class Cajero:
         error = ""
         if(cantidad <= Usuario.dinero):
             for i in range(len(self.Billetes)):
-                print(f"{self.Billetes[i].Cantidad=}")
                 if self.Billetes[i].Cantidad > 0:
                     dinerototal = self.Billetes[i].Cantidad * self.Billetes[i].Valor
 

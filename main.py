@@ -91,7 +91,6 @@ class MainPanel(Tk):
             top = AñadirCajero(self, self.Cajeros)
             top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
 
-        print(self.selecCajero)
     
     def on_toplevel_close(self, top: Toplevel):
         self.listaCajeros = []

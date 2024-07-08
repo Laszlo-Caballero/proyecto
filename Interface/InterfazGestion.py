@@ -95,18 +95,14 @@ class InterfazGestion(Toplevel):
         item = self.Tabla.identify_row(event.y)
         column = self.Tabla.identify_column(event.x)
         if self.Tabla.identify_region(event.x, event.y) == "cell":
-            print(column)
             if column == "#6" or column == "#7" or column == "#8":
                 row_index =int(item[1:], 16) - self.count
-                print(f"{row_index=}, {self.count=}")
                 if column == "#6":
                     InterfazMovmientos(self.parent, self.datos_cargados[row_index -1].movimientos, self.datos_cargados[row_index -1].nombre)
                 elif column == "#7":
-                    print("Editar")
                     top = InterfazEditar(self, self.datos_cargados[row_index -1])
                     top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
                 elif column == "#8":
-                    print("Eliminar")
                     self.Eliminar(row_index)
     
     def Guardar(self):
@@ -191,7 +187,6 @@ class InterfazGestion(Toplevel):
         dni =self.txtDni.VerEntry()
         self.txtDni.ClearEntry()
         NuevoUsuario = Usuario(Nombre, dni, NumeroCuenta, 0, [], contraseña)
-        print(f"{Nombre=}, {NumeroCuenta=}, {dni=}, {contraseña=}")
         self.datos_cargados.append(NuevoUsuario)
         self.Guardar()
         self.CargarDatos()

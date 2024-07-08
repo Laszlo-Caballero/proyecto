@@ -4,6 +4,7 @@ from Class.Usuario import Usuario
 from Components.ImageEntry import ImageEntry
 from Components.Mensaje import Mensaje
 from .InterfazMovimientos import InterfazMovmientos
+from .InterfazEditar import InterfazEditar
 from tkinter import font
 from PIL import Image, ImageTk, ImageFont
 
@@ -13,7 +14,7 @@ class InterfazGestion(Toplevel):
         super().__init__(parent)
         self.parent = parent
         self.title("Añadir Usuario")
-        self.geometry("1100x500")
+        self.geometry("1300x500")
         self.config(bg="white") 
         with open(r"Data/Usuario.pkl", 'rb') as file:
             self.datos_cargados: list[Usuario] = pickle.load(file)
@@ -79,8 +80,8 @@ class InterfazGestion(Toplevel):
 
 
         
-        self.Tabla = ttk.Treeview(self.frame_tabla, columns=("col1", "col2", "col3", "col4", "col5", "col6"), show='headings')
-        headers = ["Nombre Cliente", "Numero de Cuenta", "Dni", "Contraseña", "Cantidad de dinero", "Moviminetos"]
+        self.Tabla = ttk.Treeview(self.frame_tabla, columns=("col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8"), show='headings')
+        headers = ["Nombre Cliente", "Numero de Cuenta", "Dni", "Contraseña", "Cantidad de dinero", "Moviminetos", "Editar", "Eliminar"]
         for i in range(len(headers)):
             self.Tabla.heading(f"col{i+1}", text=headers[i])
             self.Tabla.column(f"col{i+1}", anchor='center', width=150)
@@ -94,17 +95,29 @@ class InterfazGestion(Toplevel):
         item = self.Tabla.identify_row(event.y)
         column = self.Tabla.identify_column(event.x)
         if self.Tabla.identify_region(event.x, event.y) == "cell":
-            if column == "#6":
+            print(column)
+            if column == "#6" or column == "#7" or column == "#8":
                 row_index =int(item[1:], 16) - self.count
-                print(row_index)
-                print(len(self.datos_cargados))
-                print(self.datos_cargados[row_index -1].nombre)
-                InterfazMovmientos(self.parent, self.datos_cargados[row_index -1].movimientos, self.datos_cargados[row_index -1].nombre)
+                print(f"{row_index=}, {self.count=}")
+                if column == "#6":
+                    InterfazMovmientos(self.parent, self.datos_cargados[row_index -1].movimientos, self.datos_cargados[row_index -1].nombre)
+                elif column == "#7":
+                    print("Editar")
+                    top = InterfazEditar(self, self.datos_cargados[row_index -1])
+                    top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
+                elif column == "#8":
+                    print("Eliminar")
     
     def Guardar(self):
         with open(r'Data/Usuario.pkl', 'wb') as file:
             pickle.dump(self.datos_cargados, file)
             
+    def on_toplevel_close(self, top: Toplevel):
+        top.destroy()
+        Usuario.Guardar(self.datos_cargados)
+        self.count += len(self.datos_cargados)
+        self.CargarDatos()
+
     def Buscar(self):
         criterio = self.combo.get()
         buscar = self.txtBuscar.VerEntry()
@@ -171,7 +184,7 @@ class InterfazGestion(Toplevel):
         self.txtContraseña.ClearEntry()
         dni =self.txtDni.VerEntry()
         self.txtDni.ClearEntry()
-        NuevoUsuario = Usuario(Nombre, NumeroCuenta, dni, 0, [], contraseña)
+        NuevoUsuario = Usuario(Nombre, dni, NumeroCuenta, 0, [], contraseña)
         print(f"{Nombre=}, {NumeroCuenta=}, {dni=}, {contraseña=}")
         self.datos_cargados.append(NuevoUsuario)
         self.Guardar()
@@ -181,8 +194,8 @@ class InterfazGestion(Toplevel):
     def CargarDatos(self):
         for item in self.Tabla.get_children():
             self.Tabla.delete(item)
-        for usuario in self.datos_cargados:
-            self.Tabla.insert("", "end", values=(usuario.nombre, usuario.numeroCuenta, usuario.dni, usuario.contraseña, usuario.dinero, "Ver Movimientos"))
+        for i in range(len(self.datos_cargados)):
+            self.Tabla.insert("", i, values=(self.datos_cargados[i].nombre, self.datos_cargados[i].numeroCuenta, self.datos_cargados[i].dni, self.datos_cargados[i].contraseña, self.datos_cargados[i].dinero, "Ver Movimientos", "Editar", "Dar de baja"))
 
 
 

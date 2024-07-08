@@ -5,7 +5,8 @@ from Class.Cajero import Cajero
 from Class.Usuario import Usuario
 import pickle
 #import py_hot_reload
-from Interface.InterfazAñadir import InterfazAñadir
+from Interface.InterfazGestionUsuarios import InterfazGestionUsuario
+from Interface.InterfazGestion import InterfazGestion
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
 from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
@@ -66,7 +67,7 @@ class MainPanel(Tk):
             messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
         
     def AbrirVentanaAgregar(self):
-        InterfazAñadir(self)
+        InterfazGestion(self)
 
     def AbrirVentanaActualizar(self):
         if self.selecCajero != -1:

@@ -16,7 +16,7 @@ class Retirar(Toplevel):
         self.Cajero = cajero
         with open(r'Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file)
-        with open("Data/Usuario.pkl", 'rb') as file:
+        with open(r"Data/Usuario.pkl", 'rb') as file:
             self.Usuarios: list[Usuario] = pickle.load(file) 
         
         self.IdxUsuario = -1

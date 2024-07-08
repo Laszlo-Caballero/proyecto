@@ -1,24 +1,28 @@
+import tkinter as tk
+from tkinter import Canvas
 
-class Prueba:
-    def __init__(self, nombre, dni) :
-        self.nombre = nombre
-        self.dni = dni
-    
-    def retornarnombre(self):
-        return self.nombre, self.dni 
+class CircularFrame(Canvas):
+    def __init__(self, parent, diameter, **kwargs):
+        Canvas.__init__(self, parent, width=diameter, height=diameter, **kwargs)
+        self.diameter = diameter
+        self.create_oval(0, 0, diameter, diameter, fill='blue', outline='blue')
+        
+    def place(self, **kwargs):
+        Canvas.place(self, **kwargs)
 
+class Example(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.title("Circular Frame Example")
+        self.geometry("400x400")
+        self.config(bg="white")
 
-lista = [Prueba("wdasdasd", 1231231),Prueba("wdasdasd", 1231231),Prueba("wdasdasd", 1231231)]
+root = tk.Tk()
+example = Example(root)
+circular_frame = CircularFrame(root, diameter=50)
+circular_frame.place(relx=0.5, rely=0.5, anchor= tk.W)
 
-dato = lista[0]
-
-dato.nombre = "carlos"
-
-nombre, dni = lista[0].retornarnombre()
-
-
-dinero = 2580 // 200
-cantidad = 2580 % 200
-
-
-print(f"{x=} {y=}")
+        # Adding a label inside the circular frame
+label = tk.Label(circular_frame, text="Hello", bg='blue', fg='white')
+label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+root.mainloop()

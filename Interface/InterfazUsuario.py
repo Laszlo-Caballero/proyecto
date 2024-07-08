@@ -30,14 +30,17 @@ class Cuenta(Toplevel):
         self.Saldo = Saldo(self.FrameDerecha, self.Usuario.numeroCuenta, self.Usuario.dinero, background='white')
         self.Saldo.pack()
 
-        self.FrameMovimiento = Frame(self.FrameDerecha)
+        self.FrameMovimiento = Frame(self.FrameDerecha, bg='white')
         
-        self.FMovmieto = FMovimiento(self.FrameMovimiento, self.Usuario.movimientos[0])
-        self.FMovmieto.pack(expand=True, fill='both')
+        for mv in range(len(self.Usuario.movimientos)):
+                FMovmieto = FMovimiento(self.FrameMovimiento, self.Usuario.movimientos[mv])
+                FMovmieto.grid(row=mv//2, column=mv%2, sticky='w')
+                if mv == 9:
+                     break
 
-        self.FrameMovimiento.pack(fill='both', padx=(20,0))
+        self.FrameMovimiento.pack(fill='both', padx=(20,0), pady=(10,0))
 
-        self.botones = Botones(self.FramePrincipal, [self.Retirar, self.Deposito, self.Transferencia, self.Servicios])
+        self.botones = Botones(self.FramePrincipal, [self.Retirar, self.Deposito, self.Transferencia, self.Servicios, None])
         self.botones.pack(side='top')
     
     def Retirar(self):

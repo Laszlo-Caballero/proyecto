@@ -64,13 +64,17 @@ class InterfazGestion(Toplevel):
         self.txtBuscar = ImageEntry(self,"./images/entry_img.png")
         self.txtBuscar.place(x=500, y = 420)
         
-        self.combo = ttk.Combobox(self, values=["Nombre", "Dni", "Numero Cuenta"], width = 18, state="readonly", font =(self.FontDmi,10))
+        self.combo = ttk.Combobox(self, values=["Nombre", "Dni", "Numero Cuenta", "Dinero"], width = 18, state="readonly", font =(self.FontDmi,10))
         self.combo.place(x = 730, y = 430)
         self.combo.current(0) 
         
         self.btnBuscar = Button(self, text="Buscar", fg="white", bg="#F36F2C", borderwidth=0, relief="flat", width=15, font=(self.FontDmi,11), command=self.Buscar)
         self.btnBuscar.place(x = 900, y = 430)
-        
+
+        self.btnOrdenar = Button(self, text="Ordenar", fg="white", bg="#F36F2C", borderwidth=0, relief="flat", width=15, font=(self.FontDmi,11), command=self.Ordenar)
+        self.btnOrdenar.place(x= 1100, y= 430)
+
+
         self.frame_tabla = Frame(self, width = 1000, height = 300, background='red')
         self.frame_tabla.place(x= 55, y = 170)
         
@@ -174,9 +178,63 @@ class InterfazGestion(Toplevel):
 
         
         Mensaje(self, tipo = 'Check', mensaje=datos_usuario)
-        
-        
-        
+    
+
+    def Ordenar(self):
+        criterio = self.combo.get()
+        if criterio == "Nombre":
+            self.OrdenarNombre()
+        elif criterio == "Dni":
+            self.OrdenarDni()
+        elif criterio == "Numero Cuenta":
+            self.OrdenarNumeroCuenta()
+        elif criterio == "Dinero":
+            self.OrdenarDinero()
+
+    def OrdenarNombre(self):
+        for i in range(0, len(self.datos_cargados)):
+            for j in range(i + 1, len(self.datos_cargados)):
+                if(self.datos_cargados[i].nombre > self.datos_cargados[j].nombre):
+                    aux = self.datos_cargados[i]
+                    self.datos_cargados[i] = self.datos_cargados[j]
+                    self.datos_cargados[j] = aux
+        Usuario.Guardar(self.datos_cargados)
+        self.count += len(self.datos_cargados)
+        self.CargarDatos()
+
+    def OrdenarDni(self):
+        for i in range(0, len(self.datos_cargados)):
+            for j in range(i + 1, len(self.datos_cargados)):
+                if(self.datos_cargados[i].dni > self.datos_cargados[j].dni):
+                    aux = self.datos_cargados[i]
+                    self.datos_cargados[i] = self.datos_cargados[j]
+                    self.datos_cargados[j] = aux
+        Usuario.Guardar(self.datos_cargados)
+        self.count += len(self.datos_cargados)
+        self.CargarDatos()
+
+    def OrdenarNumeroCuenta(self):
+        for i in range(0, len(self.datos_cargados)):
+            for j in range(i + 1, len(self.datos_cargados)):
+                if(self.datos_cargados[i].numeroCuenta > self.datos_cargados[j].numeroCuenta):
+                    aux = self.datos_cargados[i]
+                    self.datos_cargados[i] = self.datos_cargados[j]
+                    self.datos_cargados[j] = aux
+        Usuario.Guardar(self.datos_cargados)
+        self.count += len(self.datos_cargados)
+        self.CargarDatos()
+
+    def OrdenarDinero(self):
+        for i in range(0, len(self.datos_cargados)):
+            for j in range(i + 1, len(self.datos_cargados)):
+                if(self.datos_cargados[i].dinero < self.datos_cargados[j].dinero):
+                    aux = self.datos_cargados[i]
+                    self.datos_cargados[i] = self.datos_cargados[j]
+                    self.datos_cargados[j] = aux
+        Usuario.Guardar(self.datos_cargados)
+        self.count += len(self.datos_cargados)
+        self.CargarDatos()
+
     def AñadirUsuario(self):
         Nombre = self.txtNombre.VerEntry()
         self.txtNombre.ClearEntry()

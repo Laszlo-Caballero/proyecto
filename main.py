@@ -8,7 +8,7 @@ import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
-from Interface.InterfazActualizarDepostio import InterfazActualizarDepostio
+from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
 from Interface.InterfazAñadirCajero import AñadirCajero
 from Components.Boton import Boton
 
@@ -67,7 +67,7 @@ class MainPanel(Tk):
 
     def AbrirVentanaActualizar(self):
         if self.selecCajero != -1:
-            InterfazActualizarDepostio(self, self.selecCajero)
+            InterfazActualizarDeposito(self, self.selecCajero)
         else:
             messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
     

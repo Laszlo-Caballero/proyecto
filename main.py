@@ -20,11 +20,11 @@ class MainPanel(Tk):
         self.geometry("900x500")
         self.config(bg="white")
         self.selecCajero = -1
-
-        with open(r'Data/Cajero.pkl', 'rb') as file:
+        #cargar()
+        with open('Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 
 
-        with open(r"Data/Usuario.pkl", 'rb') as file:
+        with open("Data/Usuario.pkl", 'rb') as file:
             self.datos_cargados: list[Usuario] = pickle.load(file)
         
         self.FramePrincipal = Frame(self, bg='white')
@@ -60,11 +60,12 @@ class MainPanel(Tk):
         
         
     def AbrirVentanaLogin(self):
-        if self.selecCajero != -1:
-            Login(self, self.Cajeros[self.selecCajero])
-        else:
-            messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
-        
+        # if self.selecCajero != -1:
+        #     Login(self, self.Cajeros[self.selecCajero])
+        # else:
+        #     messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
+        Cuenta(self, self.datos_cargados[1], self.Cajeros[0])
+
     def AbrirVentanaAgregar(self):
         InterfazGestion(self)
 

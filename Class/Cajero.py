@@ -13,19 +13,6 @@ class Cajero:
             self.datos_cargados: list[Usuario] = pickle.load(file)
         self.DineroCajero = self.CargarDinero()
 
-    def SacarDinero(self, Dinero):
-        CantBilletes = []
-        if(self.DineroCajero >= Dinero):
-            for i in range(0, len(self.Billetes)-1):
-                division = Dinero // self.Billetes[i].Valor
-                if division >= 1:
-                    CantBilletes.append(Billete(self.Billetes[i].Valor, division))
-                    self.Billetes[i].Cantidad -= division
-                Dinero = Dinero % self.Billetes[i].Valor
-
-        self.DineroCajero -= Dinero
-        self.Guardar()
-        return CantBilletes
 
     def GuardarUsuario(self):
         with open(r'Data/Usuario.pkl', 'wb') as file:
@@ -104,5 +91,5 @@ class Cajero:
                     break
         Usuario.dinero += monto
         Usuario.movimientos.append(Movimiento("0", Usuario.numeroCuenta, monto, "Deposito en Efectivo"))
-        
+
     

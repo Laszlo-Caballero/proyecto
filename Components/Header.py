@@ -4,7 +4,7 @@ from PIL import Image, ImageTk, ImageFont
 #import py_hot_reload
 
 class Header(Frame):
-    def __init__(self, root, *args, **kwargs):
+    def __init__(self, root, Nombre, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
         self.configure(background="#003399")
         self.pack(fill='x') 
@@ -17,7 +17,7 @@ class Header(Frame):
         logo_label.pack(side="left", padx=(20,0))
         self.LoadCustomDemi = ImageFont.truetype("./font/Flexo-Demi-webfont.ttf", size=12)
         self.FontDmi = font.Font(self, family=self.LoadCustomDemi.font, size=12, weight="bold")
-        self.NombreTxt = Label(self, text="Hola, Laszlo", background="#003399", foreground="white", font=self.FontDmi)
+        self.NombreTxt = Label(self, text=f"Hola, {Nombre}", background="#003399", foreground="white", font=self.FontDmi)
         self.NombreTxt.pack(side="left", padx=(20,0))
         decorative_image = Image.open("./images/imagen__decorativa.png")
         decorative_image = decorative_image.resize((200, 100)) 

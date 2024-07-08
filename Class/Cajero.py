@@ -8,7 +8,7 @@ class Cajero:
     def __init__(self, Sucursal):
         self.Sucursal = Sucursal
         self.Estado = "A"
-        self.Billetes = [Billete(200, 0), Billete(100, 0), Billete(50, 0), Billete(20, 0)]
+        self.Billetes = [Billete(200, 0), Billete(100, 0), Billete(50, 0), Billete(20, 0), Billete(10, 0)]
         with open("Data/Usuario.pkl", 'rb') as file:
             self.datos_cargados: list[Usuario] = pickle.load(file)
         self.DineroCajero = self.CargarDinero()
@@ -31,8 +31,6 @@ class Cajero:
         with open('Data/Usuario.pkl', 'wb') as file:
             pickle.dump(self.datos_cargados, file)
 
-
-
     def Guardar(Cajeros):
         with open('Data/Cajero.pkl', 'wb') as file:
             pickle.dump(Cajeros, file)
@@ -43,26 +41,31 @@ class Cajero:
                 self.Billetes[i].Cantidad += BilletesNuevos.Cantidad
                 break
         self.DineroCajero = self.CargarDinero()
-            
         
     def CargarDinero(self):
         dinero = 0
         for billete in self.Billetes:
             dinero += billete.Cantidad * billete.Valor
         return dinero
-
-
-# with open('Data/Cajero.pkl', 'rb') as file:
-#      cajero: Cajero = pickle.load(file) 
-
-
-
-# # billetes :list[Billete] = cajero.SacarDinero(1100)
-
-# # cajero.Guardar()
-
-# # for billete in billetes:
-# #     print(f"Billete: {billete.Valor} Cantidad: {billete.Cantidad}")
-
-# for i in range(0, len(cajero.Billetes) -1):
-#     print(f"{cajero.Billetes[i].Valor=}  {cajero.Billetes[i].Cantidad=}")
+    
+    def RetirarDinero(self, cantidad, Usuario: Usuario):
+        listaBilletes = []
+        if(cantidad <= Usuario.dinero):
+            for billete in self.Billetes:
+                print(billete.Cantidad)
+                if billete.Cantidad > 0:
+                    dinerototal = billete.Cantidad * billete.Valor
+                    if dinerototal > cantidad:
+                        dinero = cantidad // billete.Valor
+                        if dinero > 0:
+                            cantidad = cantidad % billete.Valor
+                            listaBilletes.append(Billete(billete.Valor, dinero))
+                            billete.Cantidad -= dinero
+                    else:
+                        listaBilletes.append(Billete(billete.Valor, billete.Cantidad))
+                        cantidad -= dinerototal
+                        billete.Cantidad = 0
+                    
+                elif cantidad == 0:
+                    break 
+        return listaBilletes

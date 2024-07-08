@@ -50,7 +50,7 @@ class InterfazActualizarDepostio(Toplevel):
 
         self.txtComboBox = StringVar()
         self.ComboBoxBilletes = ttk.Combobox(self.FrameBilletes, textvariable=self.txtComboBox, state='readonly')
-        self.ComboBoxBilletes['values'] = ("200", "100", "50", "20")
+        self.ComboBoxBilletes['values'] = ("200", "100", "50", "20", "10")
         self.ComboBoxBilletes.bind("<<ComboboxSelected>>", self.on_change_comboBox)
 
         self.ComboBoxBilletes.pack()

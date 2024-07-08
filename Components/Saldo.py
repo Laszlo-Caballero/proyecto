@@ -4,11 +4,11 @@ from PIL import Image, ImageTk, ImageFont
 
 
 class Saldo(Frame):
-    def __init__(self, root, *args, **kwargs):
+    def __init__(self, root, NumCuenta, Saldo, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
         self.TipoCuenta = "Ahorro Soles"
-        self.NumeroCuenta = "999123123"
-        self.Saldo = "S/13.00"
+        self.NumeroCuenta = NumCuenta
+        self.Saldo = Saldo
         ##Font
         self.LoadCustomRegular = ImageFont.truetype("./font/Flexo-Regular-webfont.ttf", size=12)
         self.LoadCustomBold = ImageFont.truetype("./font/Flexo-Bold-webfont.ttf", size=12)

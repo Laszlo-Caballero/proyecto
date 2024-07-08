@@ -2,8 +2,9 @@ from tkinter import messagebox, Tk, Frame, StringVar, TOP, Toplevel
 from tkinter import ttk
 from PIL import Image, ImageTk
 from Class.Cajero import Cajero
+from Class.Usuario import Usuario
 import pickle
-#import py_hot_reload
+import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
@@ -22,6 +23,9 @@ class MainPanel(Tk):
         with open('Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 
 
+        with open("Data/Usuario.pkl", 'rb') as file:
+            self.datos_cargados: list[Usuario] = pickle.load(file)
+        
         self.FramePrincipal = Frame(self, bg='white')
         self.FramePrincipal.pack(expand=True)
         
@@ -55,7 +59,8 @@ class MainPanel(Tk):
         
         
     def AbrirVentanaLogin(self):
-        Login(self)
+        #Login(self, self.Cajeros[self.selecCajero])
+        Cuenta(self,self.datos_cargados[1], self.Cajeros[0])
         
     def AbrirVentanaAgregar(self):
         InterfazAñadir(self)
@@ -93,7 +98,7 @@ def Main():
     app.mainloop()
 
 
-Main()
+#Main()
 
-#py_hot_reload.run_with_reloader(Main)
+py_hot_reload.run_with_reloader(Main)
 

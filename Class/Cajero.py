@@ -13,11 +13,6 @@ class Cajero:
             self.datos_cargados: list[Usuario] = pickle.load(file)
         self.DineroCajero = self.CargarDinero()
 
-
-    def GuardarUsuario(self):
-        with open(r'Data/Usuario.pkl', 'wb') as file:
-            pickle.dump(self.datos_cargados, file)
-
     def Guardar(Cajeros):
         with open(r'Data/Cajero.pkl', 'wb') as file:
             pickle.dump(Cajeros, file)

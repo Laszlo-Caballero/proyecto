@@ -2,6 +2,7 @@ from tkinter import messagebox, Tk, Frame, StringVar, TOP, Toplevel
 from tkinter import ttk
 from PIL import Image, ImageTk
 from Class.Cajero import Cajero
+from Class.Usuario import Usuario
 import pickle
 #import py_hot_reload
 from Interface.InterfazAñadir import InterfazAñadir
@@ -10,6 +11,7 @@ from Interface.InterfazLogin import Login
 from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
 from Interface.InterfazAñadirCajero import AñadirCajero
 from Components.Boton import Boton
+from CargarCajeros import cargar
 
 class MainPanel(Tk):
     def __init__(self):
@@ -19,9 +21,12 @@ class MainPanel(Tk):
         self.config(bg="white")
         self.selecCajero = -1
 
-        with open('Data/Cajero.pkl', 'rb') as file:
+        with open(r'Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 
 
+        with open(r"Data/Usuario.pkl", 'rb') as file:
+            self.datos_cargados: list[Usuario] = pickle.load(file)
+        
         self.FramePrincipal = Frame(self, bg='white')
         self.FramePrincipal.pack(expand=True)
         
@@ -55,14 +60,18 @@ class MainPanel(Tk):
         
         
     def AbrirVentanaLogin(self):
-        Login(self)
+        if self.selecCajero != -1:
+            Login(self, self.Cajeros[self.selecCajero])
+        else:
+            messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
         
     def AbrirVentanaAgregar(self):
         InterfazAñadir(self)
 
     def AbrirVentanaActualizar(self):
         if self.selecCajero != -1:
-            InterfazActualizarDeposito(self, self.selecCajero)
+            ia = InterfazActualizarDeposito(self, self.selecCajero)
+            ia.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(ia))
         else:
             messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
     
@@ -87,7 +96,8 @@ class MainPanel(Tk):
         self.listaCajeros.append("Agregar Cajero")
         self.CmbCajeros['values'] = self.listaCajeros
         top.destroy()
-
+    def toplevel_destroy(self, top: Toplevel):
+        top.destroy()
 def Main():
     app = MainPanel()
     app.mainloop()

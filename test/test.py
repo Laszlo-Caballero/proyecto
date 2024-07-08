@@ -1,25 +1,24 @@
-import tkinter as tk
-from tkinter import ttk
 
-class Aplicacion(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Ejemplo de cambiar la fuente de un ttk.Button")
+class Prueba:
+    def __init__(self, nombre, dni) :
+        self.nombre = nombre
+        self.dni = dni
+    
+    def retornarnombre(self):
+        return self.nombre, self.dni 
 
-        # Crear un botón
-        self.boton = ttk.Button(self, text="Click Me", command=self.on_button_click)
-        self.boton.pack(pady=20, padx=50)
 
-        # Cambiar la fuente del botón después de crearlo
-        self.boton.configure(style='my.TButton')
+lista = [Prueba("wdasdasd", 1231231),Prueba("wdasdasd", 1231231),Prueba("wdasdasd", 1231231)]
 
-        # Crear un estilo personalizado para el botón
-        self.style = ttk.Style()
-        self.style.configure('my.TButton', font=('Arial', 12))
+dato = lista[0]
 
-    def on_button_click(self):
-        print("Botón clickeado")
+dato.nombre = "carlos"
 
-# Crear la ventana principal y ejecutar la aplicación
-app = Aplicacion()
-app.mainloop()
+nombre, dni = lista[0].retornarnombre()
+
+
+dinero = 2580 // 200
+cantidad = 2580 % 200
+
+
+print(f"{x=} {y=}")

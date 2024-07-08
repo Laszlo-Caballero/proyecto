@@ -95,3 +95,14 @@ class Cajero:
             receptor.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, f"Transferencia de {Usuario.numeroCuenta}"))
 
         return error
+    
+    def Deposito(self, monto, billetes: list[Billete], Usuario: Usuario):    
+        for billete in billetes:
+            for i in range(len(self.Billetes)):
+                if billete.Valor == self.Billetes[i].Valor:
+                    self.Billetes[i].Cantidad += billete.Cantidad
+                    break
+        Usuario.dinero += monto
+        Usuario.movimientos.append(Movimiento("0", Usuario.numeroCuenta, monto, "Deposito en Efectivo"))
+        
+    

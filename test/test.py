@@ -1,28 +1,25 @@
 import tkinter as tk
-from tkinter import Canvas
+from tkinter import ttk
 
-class CircularFrame(Canvas):
-    def __init__(self, parent, diameter, **kwargs):
-        Canvas.__init__(self, parent, width=diameter, height=diameter, **kwargs)
-        self.diameter = diameter
-        self.create_oval(0, 0, diameter, diameter, fill='blue', outline='blue')
-        
-    def place(self, **kwargs):
-        Canvas.place(self, **kwargs)
-
-class Example(tk.Toplevel):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.title("Circular Frame Example")
-        self.geometry("400x400")
-        self.config(bg="white")
+def validate_numeric_input(action, index, value_if_allowed,
+                           prior_value, text, validation_type, trigger_type, widget_name):
+    if text in '0123456789.-+':  # Permite dígitos, punto decimal, signo negativo y positivo
+        try:
+            float(value_if_allowed)  # Intenta convertir el valor a float
+            return True
+        except ValueError:
+            return False
+    else:
+        return False
 
 root = tk.Tk()
-example = Example(root)
-circular_frame = CircularFrame(root, diameter=50)
-circular_frame.place(relx=0.5, rely=0.5, anchor= tk.W)
+root.geometry("300x200")
 
-        # Adding a label inside the circular frame
-label = tk.Label(circular_frame, text="Hello", bg='blue', fg='white')
-label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+# Crear una validación en el widget Entry
+vcmd = (root.register(validate_numeric_input), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
+
+# Crear un ttk.Entry con la validación
+entry = ttk.Entry(root, validate='key', validatecommand=vcmd)
+entry.pack(pady=20)
+
 root.mainloop()

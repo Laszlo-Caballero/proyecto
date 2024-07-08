@@ -14,7 +14,6 @@ class Boton(ttk.Button):
         self.config(text=self.text, compound=self.position, style='Rounded.TButton', command= command)
         if(image_path != ""):
             image = Image.open(image_path)
-            image = image.resize((32, 32))
             self.photo = ImageTk.PhotoImage(image)
             self.config(image=self.photo)
         

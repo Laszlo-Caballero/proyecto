@@ -5,7 +5,7 @@ class Mensaje(Toplevel):
     def __init__(self, parent, tipo=('Check', 'Advertencia', 'Error'), mensaje = ""):
         super().__init__(parent)
         
-        self.geometry("700x100")
+        self.geometry("700x200")
         self.tipo = tipo
         self.title(tipo)
         

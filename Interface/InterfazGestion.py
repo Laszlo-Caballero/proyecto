@@ -170,7 +170,12 @@ class InterfazGestion(Toplevel):
             Mensaje(self, tipo='Error', mensaje= f"No se encontró ningún usuario con la cuenta {cuenta}.")
     
     def Mostrar(self, usuario):
-        datos_usuario = (f"Nombre: {usuario.nombre}, Numero de Cuenta: {usuario.numeroCuenta}, Dni: {usuario.dni}, Contraseña: {usuario.contraseña}, Saldo: {usuario.dinero}")
+        datos_usuario = f"Nombre: {usuario.nombre} \n"
+        datos_usuario += f"Numero de Cuenta: {usuario.numeroCuenta} \n"
+        datos_usuario += f"Dni: {usuario.dni} \n"
+        datos_usuario += f"Contraseña: {usuario.contraseña} \n"
+        datos_usuario += f"Saldo: {usuario.dinero}"
+
         
         Mensaje(self, tipo = 'Check', mensaje=datos_usuario)
         

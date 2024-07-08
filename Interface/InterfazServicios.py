@@ -77,7 +77,7 @@ class InterfazServicios(Toplevel):
 
             if monto <= self.Usuarios[self.IdxUsuario].dinero:
                 self.Usuarios[self.IdxUsuario].dinero -= monto
-                self.Usuarios[self.IdxUsuario].movimientos.append(Movimiento(self.Usuario.numeroCuenta, f"Servicio {servicio}", monto, f"Pago de servicio {servicio} con el codigo {codigo_pago}"))
+                self.Usuarios[self.IdxUsuario].movimientos.append(Movimiento(self.Usuario.numeroCuenta, f"Servicio {servicio}", monto, f"P {servicio} {codigo_pago}"))
                 Mensaje(self, tipo='Check', mensaje="Se pago correctamente el Servicio")
                 Usuario.Guardar(self.Usuarios)
 

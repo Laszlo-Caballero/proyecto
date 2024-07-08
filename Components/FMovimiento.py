@@ -5,7 +5,7 @@ import locale
 from datetime import datetime
 
 class FMovimiento(Frame):
-    def __init__(self, root, movimiento : Movimiento):
+    def __init__(self, root, movimiento : Movimiento, numeroOriginal):
 
         locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
         super().__init__(root)
@@ -13,17 +13,21 @@ class FMovimiento(Frame):
         self.Nombre = movimiento.Tipo 
         self.Fecha = movimiento.Fecha
         self.Monto = movimiento.Dinero
+        self.movimiento = movimiento
         self.FontColor = "black"
         self.config(bg='white')
         meses_espanol = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 
-        if (self.Tipo == "T" or self.Tipo == "R"):
+        if (self.Tipo == "R" or self.Tipo == "P"):
             self.Monto = -self.Monto
             self.FontColor = "red"
+        elif(self.Tipo =="T"):
+            if self.movimiento.CuentaOrigen == numeroOriginal:
+                self.FontColor = "red"
 
         self.lbl1 = Label(self, text=self.Tipo, font=Font(self, 15, Font='Bold').Font, bg='blue', foreground='white')
-        self.lbl1.grid(row=0, column=0, padx=(10,20), ipadx=10, ipady=8)
+        self.lbl1.grid(row=0, column=0, padx=(10,10), ipadx=10, ipady=8)
 
         self.FrameTxt = Frame(self, background='white')
         

@@ -141,7 +141,10 @@ class Retirar(Toplevel):
             if error == "":
                 Cajero.Guardar(self.Cajeros)
                 Usuario.Guardar(self.Usuarios)
-                Mensaje(self, tipo='Check', mensaje= "Se completo el retiro")
+                CantBilletes = "Se Completo el retiro \n"
+                for billetes in lista:
+                    CantBilletes += f"Se Desgloso {billetes.Cantidad} Billete de {billetes.Valor} \n"
+                Mensaje(self, tipo='Check', mensaje= CantBilletes)
             else:
                 Mensaje(self, tipo='Error', mensaje= error)
 

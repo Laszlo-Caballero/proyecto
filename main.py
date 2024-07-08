@@ -61,8 +61,12 @@ class MainPanel(Tk):
         
         
     def AbrirVentanaLogin(self):
-        if self.selecCajero != -1:
+        with open('Data/Cajero.pkl', 'rb') as file:
+            self.Cajeros : list[Cajero] = pickle.load(file) 
+        if self.selecCajero != -1 and self.Cajeros[self.selecCajero].Estado == "A":
             Login(self, self.Cajeros[self.selecCajero])
+        elif self.Cajeros[self.selecCajero].Estado == "N":
+            messagebox.showerror("Error", "Ese Cajero no esta activo")
         else:
             messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
 

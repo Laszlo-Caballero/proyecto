@@ -84,7 +84,7 @@ class InterfazActualizarDeposito(Toplevel):
     def on_change_comboBoxEstado(self, event):
         estado = self.cmbEstado.get()
         self.txtcmbEstado.set(estado)
-        self.Cajero.Estado = estado
+        self.LstCajero[self.IdxCajero].Estado = estado
         self.txtEstadoActual.set(f"El Estado Actual es: {self.Cajero.Estado}")
         Cajero.Guardar(self.LstCajero)
 

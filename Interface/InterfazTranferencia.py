@@ -6,9 +6,12 @@ class InterfazTransferencia(Toplevel):
         self.title("Transferencia de Dinero")
         self.geometry("500x300")
 
-        # Título
-        self.lbl = Label(self, text="Transferencia de Dinero", font=("Arial", 14))
-        self.lbl.pack(pady=10)
+        azul_oscuro = "#1D4E8F"
+        azul_claro = "#4182C4"
+        naranja = "#F28C28"
+
+        self.lbl = Label(self, text="Transferencia de Dinero", font=("Arial", 14), fg=azul_oscuro)
+        self.lbl.pack(pady=10, anchor="w")
 
         # Frame principal
         self.FramePrincipal = Frame(self)
@@ -18,7 +21,7 @@ class InterfazTransferencia(Toplevel):
         self.FrameCuenta = Frame(self.FramePrincipal)
         self.FrameCuenta.pack(pady=10)
 
-        self.lblCuenta = Label(self.FrameCuenta, text="Número de cuenta:", font=("Arial", 12))
+        self.lblCuenta = Label(self.FrameCuenta, text="Número de cuenta:", font=("Arial", 12), fg=azul_claro)
         self.lblCuenta.pack(side='left', padx=10)
 
         self.txtCuenta = Entry(self.FrameCuenta, font=("Arial", 12))
@@ -28,14 +31,14 @@ class InterfazTransferencia(Toplevel):
         self.FrameMonto = Frame(self.FramePrincipal)
         self.FrameMonto.pack(pady=10)
 
-        self.lblMonto = Label(self.FrameMonto, text="Monto a transferir:", font=("Arial", 12))
+        self.lblMonto = Label(self.FrameMonto, text="Monto a transferir:", font=("Arial", 12), fg=azul_claro)
         self.lblMonto.pack(side='left', padx=10)
 
         self.txtMonto = Entry(self.FrameMonto, font=("Arial", 12))
         self.txtMonto.pack(side='left', padx=10)
 
         # Botón transferencia
-        self.btnTransferir = Button(self.FramePrincipal, text="Realizar Transferencia", command=self.realizar_transferencia, font=("Arial", 12))
+        self.btnTransferir = Button(self.FramePrincipal, text="Realizar Transferencia", command=self.realizar_transferencia, font=("Arial", 12), bg=naranja, fg="white")
         self.btnTransferir.pack(pady=20)
 
     def realizar_transferencia(self):

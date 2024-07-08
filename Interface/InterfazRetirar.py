@@ -5,6 +5,7 @@ from Class.Usuario import Usuario
 from Class.Font import Font
 from Class.Cajero import Cajero
 from Components.Boton import Boton
+from Components.Mensaje import Mensaje
 from Class.Billete import Billete
 
 class Retirar(Toplevel):
@@ -140,9 +141,9 @@ class Retirar(Toplevel):
             if error == "":
                 Cajero.Guardar(self.Cajeros)
                 Usuario.Guardar(self.Usuarios)
-                messagebox.showinfo("Exito", "Se completo el retiro")
+                Mensaje(self, tipo='Check', mensaje= "Se completo el retiro")
             else:
-                messagebox.showerror("Error", error)
+                Mensaje(self, tipo='Error', mensaje= error)
 
             for billete in lista:
                 print(f"{billete.Valor=} {billete.Cantidad}")

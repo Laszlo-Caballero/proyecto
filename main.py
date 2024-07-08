@@ -12,6 +12,7 @@ from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
 from Interface.InterfazAñadirCajero import AñadirCajero
 from Components.Boton import Boton
 from CargarCajeros import Cargar
+from Components.Mensaje import Mensaje
 
 class MainPanel(Tk):
     def __init__(self):
@@ -20,6 +21,7 @@ class MainPanel(Tk):
         self.geometry("900x500")
         self.config(bg="white")
         self.selecCajero = -1
+        
         #cargar()
         with open('Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 
@@ -74,8 +76,7 @@ class MainPanel(Tk):
             ia = InterfazActualizarDeposito(self, self.selecCajero)
             ia.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(ia))
         else:
-            messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
-    
+            Mensaje(self, tipo='Error', mensaje= "Tienes que elejir un cajero de alguna sucursal")
     def AbrirVentanaUsuario(self):
         Cuenta(self, self.selecCajero, self.Cajeros[self.selecCajero].Sucursal)
 

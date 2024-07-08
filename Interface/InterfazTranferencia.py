@@ -1,6 +1,7 @@
 from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, messagebox
 from Class.Usuario import Usuario
 from Class.Cajero import Cajero
+from Components.Mensaje import Mensaje
 import pickle
 
 
@@ -69,13 +70,15 @@ class InterfazTransferencia(Toplevel):
                 error = Cajero.Transferencia(int(monto), self.Usuarios[self.IdxUsuario], self.Usuarios[receptor])
 
                 if error != "" : 
-                    messagebox.showerror("Error", error)
+                    Mensaje(self, tipo='Error', mensaje= error)
                 else:
                     Usuario.Guardar(self.Usuarios)
-                    messagebox.showinfo("Exito", "Se completo la transferencia")
+                    Mensaje(self, tipo='Check', mensaje= "Se completo la transferencia")
             else:
-                messagebox.showerror("Error", "No se encontro el numero de cuenta o numero de cuenta no valido")
+                Mensaje(self, tipo='Error', mensaje= "No se encontro el numero de cuenta o numero de cuenta no valido")
+                
         except:
-            messagebox.showerror("Error","No ingreso datos validos")
+            Mensaje(self, tipo='Error', mensaje= "No ingreso datos validos")
+            
 
 

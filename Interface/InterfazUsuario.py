@@ -49,7 +49,7 @@ class Cuenta(Toplevel):
                 FMovmieto = FMovimiento(self.FrameMovimiento, self.Usuario.movimientos[mv])
                 FMovmieto.grid(row=mv//2, column=mv%2, sticky='w')
                 if mv == 9:
-                     break
+                    break
 
         self.FrameMovimiento.pack(fill='both', padx=(20,0), pady=(10,0))
 

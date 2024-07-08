@@ -2,6 +2,7 @@ from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, ttk, messa
 import pickle
 from Class.Cajero import Cajero
 from Class.Billete import Billete
+from Components.Mensaje import Mensaje
 
 class InterfazActualizarDeposito(Toplevel):
     def __init__(self, parent, cajero):
@@ -96,5 +97,5 @@ class InterfazActualizarDeposito(Toplevel):
             self.txtvariable.set(f"Cantidad de billetes: {self.Cajero.Billetes[self.IdxBillete].Cantidad}")
             Cajero.Guardar(self.LstCajero)
         else:
-            messagebox.showerror("Error", "Elija un billete a insertar")
+            Mensaje(self, tipo='Error', mensaje= "Elija un billete a insertar")
 

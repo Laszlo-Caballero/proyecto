@@ -1,5 +1,6 @@
 from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, messagebox
 from tkinter import ttk
+from Components.Mensaje import Mensaje
 
 class InterfazServicios(Toplevel):
     def __init__(self, parent):
@@ -7,12 +8,10 @@ class InterfazServicios(Toplevel):
         self.title("Servicios")
         self.geometry("500x350")
 
-        # Configuración de colores
         azul_oscuro = "#1D4E8F"
         azul_claro = "#4182C4"
         naranja = "#F28C28"
 
-        # Título
         self.lbl = Label(self, text="Servicios", font=("Arial", 14), fg=azul_oscuro)
         self.lbl.pack(pady=10, anchor="w")
 
@@ -30,10 +29,9 @@ class InterfazServicios(Toplevel):
         self.servicio_var = StringVar()
         self.cmbServicio = ttk.Combobox(self.FrameServicio, textvariable=self.servicio_var, state='readonly')
         self.cmbServicio['values'] = ["Agua", "Luz"]
-        self.cmbServicio.current(0)  # Valor predeterminado
+        self.cmbServicio.current(0)  
         self.cmbServicio.pack(side='left', padx=10)
 
-        # Frame del código de pago
         self.FrameCodigo = Frame(self.FramePrincipal)
         self.FrameCodigo.pack(pady=10)
 
@@ -62,15 +60,17 @@ class InterfazServicios(Toplevel):
         codigo_pago = self.txtCodigo.get()
         monto = self.txtMonto.get()
         if not servicio or not codigo_pago or not monto:
-            messagebox.showerror("Error", "Por favor, ingrese todos los campos")
+            Mensaje(self, tipo='Error', mensaje= "Por favor, ingrese todos los campos")
         else:
             try:
                 monto = float(monto)
                 if monto <= 0:
                     raise ValueError
-                messagebox.showinfo("Éxito", f"Se ha pagado {monto} al servicio {servicio} con el código {codigo_pago}")
+                Mensaje(self, tipo='Check', mensaje= f"Se ha pagado {monto} al servicio {servicio} con el código {codigo_pago}")
+                
+                
             except ValueError:
-                messagebox.showerror("Error", "Por favor, ingrese un monto válido")
+                Mensaje(self, tipo='Check', mensaje= "Por favor, ingrese un monto válido")
 
 
 if __name__ == "__main__":

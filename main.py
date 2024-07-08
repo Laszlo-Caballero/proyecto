@@ -11,6 +11,7 @@ from Interface.InterfazLogin import Login
 from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
 from Interface.InterfazAñadirCajero import AñadirCajero
 from Components.Boton import Boton
+from CargarCajeros import cargar
 
 class MainPanel(Tk):
     def __init__(self):
@@ -19,7 +20,7 @@ class MainPanel(Tk):
         self.geometry("900x500")
         self.config(bg="white")
         self.selecCajero = -1
-
+        cargar()
         with open('Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 
 
@@ -60,14 +61,15 @@ class MainPanel(Tk):
         
     def AbrirVentanaLogin(self):
         #Login(self, self.Cajeros[self.selecCajero])
-        Cuenta(self,self.datos_cargados[1], self.Cajeros[0])
+        Cuenta(self,self.datos_cargados[1], self.Cajeros[self.selecCajero])
         
     def AbrirVentanaAgregar(self):
         InterfazAñadir(self)
 
     def AbrirVentanaActualizar(self):
         if self.selecCajero != -1:
-            InterfazActualizarDeposito(self, self.selecCajero)
+            ia = InterfazActualizarDeposito(self, self.selecCajero)
+            ia.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(ia))
         else:
             messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
     
@@ -92,7 +94,8 @@ class MainPanel(Tk):
         self.listaCajeros.append("Agregar Cajero")
         self.CmbCajeros['values'] = self.listaCajeros
         top.destroy()
-
+    def toplevel_destroy(self, top: Toplevel):
+        top.destroy()
 def Main():
     app = MainPanel()
     app.mainloop()

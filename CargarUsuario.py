@@ -19,7 +19,7 @@ Datos = [
  ]
 
 
-with open('Data/Usuario.pkl', 'wb') as file:
+with open(r'Data/Usuario.pkl', 'wb') as file:
     pickle.dump(Datos, file)
 
 

@@ -43,7 +43,7 @@ class Cajero:
                     if dinerototal > cantidad:
                         dinero = cantidad // self.Billetes[i].Valor
                     
-                        if dinero > 0:
+                        if dinero >= 0:
                             cantidad = cantidad % self.Billetes[i].Valor
                             listaBilletes.append(Billete(self.Billetes[i].Valor, dinero))
                             self.Billetes[i].Cantidad -= dinero

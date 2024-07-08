@@ -8,7 +8,7 @@ class InputNumber(Frame):
         self.strCantidad = StringVar()
         self.strCantidad.set("0")
 
-        self.txtMonto = Entry(self, textvariable=self.strCantidad)
+        self.txtMonto = Entry(self, textvariable=self.strCantidad, state=DISABLED)
         self.txtMonto.grid(row=0, column=0, ipady=10)
 
         self.FrameBtn = Frame(self)

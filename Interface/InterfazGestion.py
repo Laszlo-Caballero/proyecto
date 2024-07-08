@@ -57,8 +57,6 @@ class InterfazGestion(Toplevel):
         self.txtDni = ImageEntry(self.frame_inicio,"./images/entry_img.png")
         self.txtDni.place(x=770, y = 100)
         
-
-        
         self.frame_tabla = Frame(self, width = 1000, height = 300, background='red')
         self.frame_tabla.place(x= 55, y = 170)
         
@@ -92,19 +90,20 @@ class InterfazGestion(Toplevel):
             pickle.dump(self.datos_cargados, file)
     
     def AñadirUsuario(self):
-        # Nombre = self.txtNombre.get()
-        # self.txtNombre.delete(0, tk.END)
-        # NumeroCuenta = self.txtNroCuenta.get()
-        # self.txtNroCuenta.delete(0, tk.END)
-        # contraseña = self.txtContraseña.get()
-        # self.txtContraseña.delete(0, tk.END)
-        # NuevoUsuario = Usuario(Nombre, NumeroCuenta, 0, [], contraseña)
-        # print(f"{Nombre=}, {NumeroCuenta=}, {contraseña=}")
-        # self.datos_cargados.append(NuevoUsuario)
-        # self.Guardar()
-        # self.CargarDatos()
-        # self.count += len(self.datos_cargados) -1
-        pass
+        Nombre = self.txtNombre.VerEntry()
+        self.txtNombre.ClearEntry()
+        NumeroCuenta = self.txtNroCuenta.VerEntry()
+        self.txtNroCuenta.ClearEntry()
+        contraseña = self.txtContraseña.VerEntry()
+        self.txtContraseña.ClearEntry()
+        dni =self.txtDni.VerEntry()
+        self.txtDni.ClearEntry()
+        NuevoUsuario = Usuario(Nombre, NumeroCuenta, dni, 0, [], contraseña)
+        print(f"{Nombre=}, {NumeroCuenta=}, {dni=}, {contraseña=}")
+        self.datos_cargados.append(NuevoUsuario)
+        self.Guardar()
+        self.CargarDatos()
+        self.count += len(self.datos_cargados) -1
     
     def CargarDatos(self):
         for item in self.Tabla.get_children():

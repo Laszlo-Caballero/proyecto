@@ -73,8 +73,6 @@ class InterfazGestion(Toplevel):
         self.Tabla.bind("<Button-1>", self.VerMovimientos)
         self.Tabla.pack(expand=True, fill='both', side="right")
 
-        self.ContenedorForm.pack(side='left', padx=(0,20))
-        self.FramePrincipal.pack(expand=True)
         
     def VerMovimientos(self, event):
         item = self.Tabla.identify_row(event.y)

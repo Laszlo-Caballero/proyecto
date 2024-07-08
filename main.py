@@ -62,11 +62,10 @@ class MainPanel(Tk):
         
         
     def AbrirVentanaLogin(self):
-        # if self.selecCajero != -1:
-        #     Login(self, self.Cajeros[self.selecCajero])
-        # else:
-        #     messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
-        top = Cuenta(self, self.datos_cargados[1], self.Cajeros[0])
+        if self.selecCajero != -1:
+            Login(self, self.Cajeros[self.selecCajero])
+        else:
+            messagebox.showerror("Error", "Tienes que elejir un cajero de alguna sucursal")
 
     def AbrirVentanaAgregar(self):
         InterfazGestion(self)

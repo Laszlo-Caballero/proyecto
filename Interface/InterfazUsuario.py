@@ -10,6 +10,7 @@ from Components.FMovimiento import FMovimiento
 from .InterfazMovimientos import InterfazMovmientos
 from .InterfazTranferencia import InterfazTransferencia
 from .InterfazDepositar import InterfazDepositar
+from .InterfazServicios import InterfazServicios
 import pickle
 # import py_hot_reload
 
@@ -22,7 +23,7 @@ class Cuenta(Toplevel):
         self.title("Cuenta Usuario")
         self.geometry("900x500")
         self.config(bg="white")
-        self.header = Header(self, self.Usuario.nombre)
+        self.header = Header(self, self.Usuario.nombre, Cajero.Sucursal)
         self.header.pack(fill='x')
 
         self.idxUsuario = -1
@@ -73,6 +74,8 @@ class Cuenta(Toplevel):
 
     def Servicios(self):
         print("Pagar Servicios")
+        top = InterfazServicios(self, self.Usuario)
+        top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
     
     def VerMovimientos(self):
          InterfazMovmientos(self, self.Usuarios[self.idxUsuario].movimientos, self.Usuarios[self.idxUsuario].nombre)

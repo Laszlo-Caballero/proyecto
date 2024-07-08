@@ -1,9 +1,12 @@
 from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, messagebox
 from tkinter import ttk
 from Components.Mensaje import Mensaje
+from Class.Usuario import Usuario
+from Class.Movimiento import Movimiento
+import pickle
 
 class InterfazServicios(Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent, usuario: Usuario):
         super().__init__(parent)
         self.title("Servicios")
         self.geometry("500x350")
@@ -11,6 +14,16 @@ class InterfazServicios(Toplevel):
         azul_oscuro = "#1D4E8F"
         azul_claro = "#4182C4"
         naranja = "#F28C28"
+
+        self.Usuario = usuario
+        with open(r"Data/Usuario.pkl", 'rb') as file:
+            self.Usuarios: list[Usuario] = pickle.load(file) 
+        
+        self.IdxUsuario = -1
+
+        for i in range(len(self.Usuarios)):
+            if self.Usuarios[i].numeroCuenta == self.Usuario.numeroCuenta:
+                self.IdxUsuario = i
 
         self.lbl = Label(self, text="Servicios", font=("Arial", 14), fg=azul_oscuro)
         self.lbl.pack(pady=10, anchor="w")
@@ -28,7 +41,7 @@ class InterfazServicios(Toplevel):
 
         self.servicio_var = StringVar()
         self.cmbServicio = ttk.Combobox(self.FrameServicio, textvariable=self.servicio_var, state='readonly')
-        self.cmbServicio['values'] = ["Agua", "Luz"]
+        self.cmbServicio['values'] = ["Agua", "Luz", "Internet", "Otros"]
         self.cmbServicio.current(0)  
         self.cmbServicio.pack(side='left', padx=10)
 
@@ -57,25 +70,20 @@ class InterfazServicios(Toplevel):
 
     def realizar_pago(self):
         servicio = self.servicio_var.get()
-        codigo_pago = self.txtCodigo.get()
-        monto = self.txtMonto.get()
-        if not servicio or not codigo_pago or not monto:
-            Mensaje(self, tipo='Error', mensaje= "Por favor, ingrese todos los campos")
-        else:
-            try:
-                monto = float(monto)
-                if monto <= 0:
-                    raise ValueError
-                Mensaje(self, tipo='Check', mensaje= f"Se ha pagado {monto} al servicio {servicio} con el código {codigo_pago}")
-                
-                
-            except ValueError:
-                Mensaje(self, tipo='Check', mensaje= "Por favor, ingrese un monto válido")
+
+        try:
+            codigo_pago = int(self.txtCodigo.get())
+            monto = int(self.txtMonto.get())
+
+            if monto <= self.Usuarios[self.IdxUsuario].dinero:
+                self.Usuarios[self.IdxUsuario].dinero -= monto
+                self.Usuarios[self.IdxUsuario].movimientos.append(Movimiento(self.Usuario.numeroCuenta, f"Servicio {servicio}", monto, f"Pago de servicio {servicio} con el codigo {codigo_pago}"))
+                Mensaje(self, tipo='Check', mensaje="Se pago correctamente el Servicio")
+                Usuario.Guardar(self.Usuarios)
+
+            else:
+                Mensaje(self, tipo='Error', mensaje="No tiene le suficiente dinero para pagar el servicio")
 
 
-if __name__ == "__main__":
-    from tkinter import Tk
-    root = Tk()
-    root.withdraw()  
-    app = InterfazServicios(root)
-    app.mainloop()
+        except:
+            Mensaje(self, tipo='Error', mensaje="Ingrese los datos Correctos")

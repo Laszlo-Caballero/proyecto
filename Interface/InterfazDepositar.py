@@ -5,6 +5,7 @@ from Class.Cajero import Cajero
 from Class.Font import Font
 from Components.Deposito import CDinero
 from Components.Boton import Boton
+from Components.Mensaje import Mensaje
 from Class.Billete import Billete
 import pickle
 
@@ -81,9 +82,13 @@ class InterfazDepositar(Toplevel):
             if ipt.get_Cantidad() != "0":
                 billete = Billete(int(ipt.valor), int(ipt.get_Cantidad()))
                 lista_Billetes.append(billete)
-
-
-        
+        if monto > 0:
+            self.Cajeros[self.selecCajero].Deposito(monto, lista_Billetes, self.Usuarios[self.IdxUsuario])
+            Cajero.Guardar(self.Cajeros)
+            Usuario.Guardar(self.Usuarios)
+            Mensaje(self, tipo='Check', mensaje="Se Completo el Deposito")
+        else:
+            Mensaje(self, tipo='Error', mensaje="Ingrese dinero al cajero")
 
 
         

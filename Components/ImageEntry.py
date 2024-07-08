@@ -1,7 +1,6 @@
 from tkinter import *
-from PIL import Image, ImageTk, ImageFont
-from tkinter import ttk
-from .Boton import Boton
+from PIL import Image, ImageTk
+import tkinter as tk
 
 class ImageEntry(Frame):
     def __init__(self, parent, path, width = 28):
@@ -21,3 +20,6 @@ class ImageEntry(Frame):
 
     def VerEntry(self):
         return self.entry.get()
+    
+    def ClearEntry(self):
+        return self.entry.delete(0,tk.END)

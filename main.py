@@ -11,7 +11,7 @@ from Interface.InterfazLogin import Login
 from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
 from Interface.InterfazAñadirCajero import AñadirCajero
 from Components.Boton import Boton
-from CargarCajeros import cargar
+from CargarCajeros import Cargar
 
 class MainPanel(Tk):
     def __init__(self):

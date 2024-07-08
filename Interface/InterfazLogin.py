@@ -69,6 +69,7 @@ class Login(Toplevel):
                 if usuario.dni == self.txtDni.get():
                     encontrado = True
                     if usuario.contraseña == self.txtContraseña.get():
+                        self.withdraw()
                         Cuenta(self, usuario, self.cajero)
                         break
                     else:

@@ -1,7 +1,7 @@
 from Class.Cajero import Cajero
 import pickle
 
-def cargar():
+def Cargar():
     dato1 = Cajero("Plaza Norte")
     for billete in dato1.Billetes:
         billete.Cantidad = 23
@@ -13,7 +13,5 @@ def cargar():
         Cajero("Tottus")
     ]
 
-    with open('Data/Cajero.pkl', 'wb') as file:
+    with open(r'Data/Cajero.pkl', 'wb') as file:
         pickle.dump(Cajeros, file)
-
-#🐀

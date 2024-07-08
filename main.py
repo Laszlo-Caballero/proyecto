@@ -4,8 +4,8 @@ from PIL import Image, ImageTk
 from Class.Cajero import Cajero
 from Class.Usuario import Usuario
 import pickle
-import py_hot_reload
-from Interface.InterfazAñadir import InterfazAñadir
+#import py_hot_reload
+from Interface.InterfazGestion import InterfazGestion
 from Interface.InterfazUsuario import Cuenta
 from Interface.InterfazLogin import Login
 from Interface.InterfazActualizarDeposito import InterfazActualizarDeposito
@@ -67,7 +67,7 @@ class MainPanel(Tk):
         Cuenta(self, self.datos_cargados[1], self.Cajeros[0])
 
     def AbrirVentanaAgregar(self):
-        InterfazAñadir(self)
+        InterfazGestion(self)
 
     def AbrirVentanaActualizar(self):
         if self.selecCajero != -1:
@@ -104,7 +104,7 @@ def Main():
     app.mainloop()
 
 
-#Main()
+Main()
 
-py_hot_reload.run_with_reloader(Main)
+#py_hot_reload.run_with_reloader(Main)
 

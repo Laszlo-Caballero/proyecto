@@ -1,10 +1,8 @@
 from tkinter import Toplevel, Label, Frame, Entry, Button
 from PIL import Image, ImageTk, ImageFont
 from tkinter import font
-from tkinter import ttk
 from tkinter import messagebox
 from Class.Usuario import Usuario
-from Class.Cajero import Cajero
 import pickle
 from Interface.InterfazUsuario import Cuenta
 

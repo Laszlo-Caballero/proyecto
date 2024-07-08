@@ -91,7 +91,7 @@ class Cajero:
             error = "No tiene el dinero suficiente"     
 
         if error == "":
-            Usuario.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, "Transferencia"))
-            receptor.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, "Transferencia"))
+            Usuario.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, f"Transferencia a {receptor.numeroCuenta}"))
+            receptor.movimientos.append(Movimiento(Usuario.numeroCuenta, receptor.numeroCuenta, cantidad, f"Transferencia de {Usuario.numeroCuenta}"))
 
         return error

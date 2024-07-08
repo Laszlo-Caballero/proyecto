@@ -60,6 +60,20 @@ class Cuenta(Toplevel):
         top = Retirar(self, self.Usuario, self.Cajero)
         top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
 
+    def Deposito(self):
+        print("Deposito")
+
+    def Transferencia(self):
+        print("Transferencia")
+        top = InterfazTransferencia(self, self.Usuario)
+        top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
+
+    def Servicios(self):
+        print("Pagar Servicios")
+    
+    def VerMovimientos(self):
+         InterfazMovmientos(self, self.Usuarios[self.idxUsuario].movimientos, self.Usuarios[self.idxUsuario].nombre)
+
     def on_toplevel_close(self, top: Toplevel):
         top.destroy()
         self.CargarDatos()
@@ -69,19 +83,6 @@ class Cuenta(Toplevel):
     def CargarDatos(self):
         with open("Data/Usuario.pkl", 'rb') as file:
             self.Usuarios: list[Usuario] = pickle.load(file)
-
-    def Deposito(self):
-        print("Deposito")
-    def Transferencia(self):
-        print("Transferencia")
-        top = InterfazTransferencia(self, self.Usuario)
-        top.protocol("WM_DELETE_WINDOW", lambda: self.on_toplevel_close(top))
-
-    def Servicios(self):
-        print("Pagar Servicios")
-    def VerMovimientos(self):
-         InterfazMovmientos(self, self.Usuarios[self.idxUsuario].movimientos, self.Usuarios[self.idxUsuario].nombre)
-
         
 
 

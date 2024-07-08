@@ -1,11 +1,13 @@
 from tkinter import Toplevel, Label, ttk, Frame, Entry, Button
-import tkinter as tk
 import pickle
 from Class.Usuario import Usuario
 from Components.ImageEntry import ImageEntry
+from Components.Mensaje import Mensaje
 from .InterfazMovimientos import InterfazMovmientos
 from tkinter import font
 from PIL import Image, ImageTk, ImageFont
+from tkinter import messagebox
+
 
 class InterfazGestion(Toplevel):
     def __init__(self, parent):
@@ -14,7 +16,6 @@ class InterfazGestion(Toplevel):
         self.title("Añadir Usuario")
         self.geometry("1100x500")
         self.config(bg="white") 
-        
         with open(r"Data/Usuario.pkl", 'rb') as file:
             self.datos_cargados: list[Usuario] = pickle.load(file)
             
@@ -57,11 +58,27 @@ class InterfazGestion(Toplevel):
         self.txtDni = ImageEntry(self.frame_inicio,"./images/entry_img.png")
         self.txtDni.place(x=770, y = 100)
         
+        self.lblBuscar = Label(self.frame_inicio, text ="Buscar", foreground="#003399", font =(self.FontDmi,12), background='white')
+        self.lblBuscar.place(x = 550, y = 10)
+        
+        self.txtBuscar = ImageEntry(self,"./images/entry_img.png")
+        self.txtBuscar.place(x=500, y = 420)
+        
+        self.combo = ttk.Combobox(self, values=["Nombre", "Dni", "Numero Cuenta"], width = 18, state="readonly", font =(self.FontDmi,10))
+        self.combo.place(x = 730, y = 430)
+        self.combo.current(0) 
+        
+        self.btnBuscar = Button(self, text="Buscar", fg="white", bg="#F36F2C", borderwidth=0, relief="flat", width=15, font=(self.FontDmi,11), command=self.Buscar)
+        self.btnBuscar.place(x = 900, y = 430)
+        
         self.frame_tabla = Frame(self, width = 1000, height = 300, background='red')
         self.frame_tabla.place(x= 55, y = 170)
         
-        self.btnAgregar = Button(self, text = "Agregar Usuario", fg="white", bg="#F36F2C", borderwidth=0, relief="flat", width=30, font=(self.FontDmi,12),  command=self.AñadirUsuario)
+        self.btnAgregar = Button(self, text = "Agregar Usuario", fg="white", bg="#F36F2C", borderwidth=0, relief="flat", width=25, font=(self.FontDmi,12),  command=self.AñadirUsuario)
         self.btnAgregar.place(x = 75, y = 430)
+        
+
+
         
         self.Tabla = ttk.Treeview(self.frame_tabla, columns=("col1", "col2", "col3", "col4", "col5", "col6"), show='headings')
         headers = ["Nombre Cliente", "Numero de Cuenta", "Dni", "Contraseña", "Cantidad de dinero", "Moviminetos"]
@@ -88,7 +105,64 @@ class InterfazGestion(Toplevel):
     def Guardar(self):
         with open(r'Data/Usuario.pkl', 'wb') as file:
             pickle.dump(self.datos_cargados, file)
+            
+    def Buscar(self):
+        criterio = self.combo.get()
+        buscar = self.txtBuscar.VerEntry()
+        
+        if criterio == "Nombre":
+            self.BuscarNombre(buscar)
+        elif criterio == "Dni":
+            self.BuscarDni(buscar)
+        elif criterio == "Numero Cuenta":
+            self.BuscarCuenta(buscar)
+            
+    def BuscarDni(self, dni):
+        usuario_encontrado = None   
+        
+        for usuario in self.datos_cargados:
+            if usuario.dni == dni:
+                usuario_encontrado = usuario
+                break
+            
+        if usuario_encontrado:
+            self.Mostrar(usuario= usuario_encontrado)
+        else:
+            Mensaje(self, tipo='Error', mensaje= f"No se encontró ningún usuario con el dni {dni}.")
+
+    def BuscarNombre(self, nombre):
+        usuario_encontrado = None   
+        
+        for usuario in self.datos_cargados:
+            if usuario.nombre == nombre:
+                usuario_encontrado = usuario
+                break
+            
+        if usuario_encontrado:
+            self.Mostrar(usuario= usuario_encontrado)
+        else:
+            Mensaje(self, tipo='Error', mensaje= f"No se encontró ningún usuario con el nombre {nombre}.")
     
+    def BuscarCuenta(self, cuenta):
+        usuario_encontrado = None   
+        
+        for usuario in self.datos_cargados:
+            if usuario.numeroCuenta == cuenta:
+                usuario_encontrado = usuario
+                break
+            
+        if usuario_encontrado:
+            self.Mostrar(usuario= usuario_encontrado)
+        else:
+            Mensaje(self, tipo='Error', mensaje= f"No se encontró ningún usuario con la cuenta {cuenta}.")
+    
+    def Mostrar(self, usuario):
+        datos_usuario = (f"Nombre: {usuario.nombre}, Numero de Cuenta: {usuario.numeroCuenta}, Dni: {usuario.dni}, Contraseña: {usuario.contraseña}, Saldo: {usuario.dinero}")
+        
+        Mensaje(self, tipo = 'Check', mensaje=datos_usuario)
+        
+        
+        
     def AñadirUsuario(self):
         Nombre = self.txtNombre.VerEntry()
         self.txtNombre.ClearEntry()
@@ -110,10 +184,7 @@ class InterfazGestion(Toplevel):
             self.Tabla.delete(item)
         for usuario in self.datos_cargados:
             self.Tabla.insert("", "end", values=(usuario.nombre, usuario.numeroCuenta, usuario.dni, usuario.contraseña, usuario.dinero, "Ver Movimientos"))
-            
-        
-        
-        
+
 
 
 

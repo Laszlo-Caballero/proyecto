@@ -20,6 +20,7 @@ class MainPanel(Tk):
         self.geometry("900x500")
         self.config(bg="white")
         self.selecCajero = -1
+        
         #cargar()
         with open('Data/Cajero.pkl', 'rb') as file:
             self.Cajeros : list[Cajero] = pickle.load(file) 

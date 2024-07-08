@@ -52,13 +52,15 @@ class Cuenta(Toplevel):
         self.botones.pack(side='top')
     
     def mostrarMovimientos(self):
+            for widget in self.FrameMovimiento.winfo_children():
+                widget.destroy()
             count = 0
             for mv in range(len(self.Usuarios[self.idxUsuario].movimientos) - 1, -1, -1):
-                print(f"{mv=}")
-                count += 1
+                print(f"{mv=}  {self.Usuarios[self.idxUsuario].movimientos[mv].Tipo=}")
                 FMovmieto = FMovimiento(self.FrameMovimiento, self.Usuarios[self.idxUsuario].movimientos[mv], self.Usuario.numeroCuenta)
-                FMovmieto.grid(row=mv//2, column=mv%2, sticky='w')
-                if count == 9:
+                FMovmieto.grid(row=count//2, column=count%2, sticky='w')
+                count += 1
+                if count == 12:
                     break
 
     def Retirar(self):

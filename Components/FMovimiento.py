@@ -10,7 +10,8 @@ class FMovimiento(Frame):
         locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
         super().__init__(root)
         self.Tipo = movimiento.Tipo[0] ## Transfrencia T, R retiro
-        self.Nombre = movimiento.Tipo 
+        self.Nombre = movimiento.Tipo
+        print(self.Nombre)
         self.Fecha = movimiento.Fecha
         self.Monto = movimiento.Dinero
         self.movimiento = movimiento

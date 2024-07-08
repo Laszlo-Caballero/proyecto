@@ -7,6 +7,7 @@ from .InterfazRetirar import Retirar
 from Class.Usuario import Usuario
 from Class.Cajero import Cajero
 from Components.FMovimiento import FMovimiento
+from .InterfazMovimientos import InterfazMovmientos
 # import py_hot_reload
 
 class Cuenta(Toplevel):
@@ -40,7 +41,7 @@ class Cuenta(Toplevel):
 
         self.FrameMovimiento.pack(fill='both', padx=(20,0), pady=(10,0))
 
-        self.botones = Botones(self.FramePrincipal, [self.Retirar, self.Deposito, self.Transferencia, self.Servicios, None])
+        self.botones = Botones(self.FramePrincipal, [self.Retirar, self.Deposito, self.Transferencia, self.Servicios, self.VerMovimientos])
         self.botones.pack(side='top')
     
     def Retirar(self):
@@ -52,6 +53,8 @@ class Cuenta(Toplevel):
         print("Transferencia")
     def Servicios(self):
         print("Pagar Servicios")
+    def VerMovimientos(self):
+         InterfazMovmientos(self, self.Usuario.movimientos, self.Usuario.nombre)
 
         
 

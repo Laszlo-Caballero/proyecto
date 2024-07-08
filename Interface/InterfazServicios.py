@@ -1,5 +1,6 @@
 from tkinter import Toplevel, Label, Frame, Entry, StringVar, Button, messagebox
 from tkinter import ttk
+from Components.Mensaje import Mensaje
 
 class InterfazServicios(Toplevel):
     def __init__(self, parent):
@@ -59,15 +60,17 @@ class InterfazServicios(Toplevel):
         codigo_pago = self.txtCodigo.get()
         monto = self.txtMonto.get()
         if not servicio or not codigo_pago or not monto:
-            messagebox.showerror("Error", "Por favor, ingrese todos los campos")
+            Mensaje(self, tipo='Error', mensaje= "Por favor, ingrese todos los campos")
         else:
             try:
                 monto = float(monto)
                 if monto <= 0:
                     raise ValueError
-                messagebox.showinfo("Éxito", f"Se ha pagado {monto} al servicio {servicio} con el código {codigo_pago}")
+                Mensaje(self, tipo='Check', mensaje= f"Se ha pagado {monto} al servicio {servicio} con el código {codigo_pago}")
+                
+                
             except ValueError:
-                messagebox.showerror("Error", "Por favor, ingrese un monto válido")
+                Mensaje(self, tipo='Check', mensaje= "Por favor, ingrese un monto válido")
 
 
 if __name__ == "__main__":

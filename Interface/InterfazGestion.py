@@ -6,7 +6,6 @@ from Components.Mensaje import Mensaje
 from .InterfazMovimientos import InterfazMovmientos
 from tkinter import font
 from PIL import Image, ImageTk, ImageFont
-from tkinter import messagebox
 
 
 class InterfazGestion(Toplevel):

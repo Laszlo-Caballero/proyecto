@@ -1,8 +1,8 @@
 from tkinter import Toplevel, Label, Frame, Entry, Button
 from PIL import Image, ImageTk, ImageFont
 from tkinter import font
-from tkinter import messagebox
 from Class.Usuario import Usuario
+from Components.Mensaje import Mensaje
 import pickle
 from Interface.InterfazUsuario import Cuenta
 
@@ -72,10 +72,10 @@ class Login(Toplevel):
                         Cuenta(self, usuario, self.cajero)
                         break
                     else:
-                        messagebox.showerror("Error", "Contraseña incorrecta")
+                        Mensaje(self, tipo='Error', mensaje="Contraseña incorrecta")
                         break
             if not encontrado:
-                messagebox.showerror("Error", "Cuenta no encontrada")
+                Mensaje(self, tipo='Error', mensaje= "Cuenta no encontrada")
                 
         except ValueError:
-            messagebox.showerror("Error", "Debe insertar un número válido en el campo DNI")
+            Mensaje(self, tipo='Error', mensaje= "Debe insertar un número válido en el campo DNI")

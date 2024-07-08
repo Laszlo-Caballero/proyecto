@@ -39,7 +39,7 @@ class InterfazGestion(Toplevel):
         self.txtNombre = ImageEntry(self.frame_inicio, "./images/entry_img.png" )
         self.txtNombre.place(x=25, y = 100)
         
-        self.lblNroCuenta = Label(self.frame_inicio, text="Numero de cuenta",foreground="#003399", font =(self.FontDmi,12), background='white' )
+        self.lblNroCuenta = Label(self.frame_inicio, text="Numero de Cuenta",foreground="#003399", font =(self.FontDmi,12), background='white' )
         self.lblNroCuenta.place(x= 290, y = 60)
         
         self.txtNroCuenta = ImageEntry(self.frame_inicio,"./images/entry_img.png" )

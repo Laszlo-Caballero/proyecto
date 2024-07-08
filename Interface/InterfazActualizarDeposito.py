@@ -7,11 +7,11 @@ class InterfazActualizarDeposito(Toplevel):
     def __init__(self, parent, cajero):
         super().__init__(parent)
         self.title("Actualizar Depósito")
-        self.geometry("500x400")
+        self.geometry("500x300")
 
         self.IdxCajero = cajero
         self.IdxBillete = -1
-        with open('Data/Cajero.pkl', 'rb') as file:
+        with open(r'Data/Cajero.pkl', 'rb') as file:
             self.LstCajero: list[Cajero] = pickle.load(file)
         self.Cajero = self.LstCajero[self.IdxCajero]
 
@@ -53,7 +53,7 @@ class InterfazActualizarDeposito(Toplevel):
 
         self.txtComboBox = StringVar()
         self.ComboBoxBilletes = ttk.Combobox(self.FrameBilletes, textvariable=self.txtComboBox, state='readonly', font=("Arial", 12))
-        self.ComboBoxBilletes['values'] = ("200", "100", "50", "20", "10")
+        self.ComboBoxBilletes['values'] = ("200", "100", "50", "20")
         self.ComboBoxBilletes.bind("<<ComboboxSelected>>", self.on_change_comboBox)
         self.ComboBoxBilletes.pack(pady=5)
 
